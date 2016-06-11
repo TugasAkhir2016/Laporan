@@ -1,0 +1,11 @@
+D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\ProgramTA.exe.config
+D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.csprojResolveAssemblyReference.cache
+D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Home.resources
+D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Properties.Resources.resources
+D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.csproj.GenerateResource.Cache
+D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\ProgramTA.exe
+D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\ProgramTA.pdb
+D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.exe
+D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.pdb
+D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Log.resources
+D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Percobaan.resources
