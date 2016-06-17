@@ -9,3 +9,6 @@ D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.exe
 D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.pdb
 D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Log.resources
 D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Percobaan.resources
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\bin\Debug\ProgramTA.exe.config
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.exe
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.pdb
