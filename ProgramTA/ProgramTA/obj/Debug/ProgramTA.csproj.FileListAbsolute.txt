@@ -12,3 +12,25 @@ D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Percobaan.resource
 D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\bin\Debug\ProgramTA.exe.config
 D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.exe
 D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.pdb
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\ProgramTA.exe.config
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\ProgramTA.exe
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\ProgramTA.pdb
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\ProgramTA.exe
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\ProgramTA.pdb
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.dll
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Imaging.dll
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Math.dll
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.xml
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Imaging.xml
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Math.xml
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\ProgramTA.csprojResolveAssemblyReference.cache
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Home.resources
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Log.resources
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Percobaan.resources
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Properties.Resources.resources
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Tampil_CItra.resources
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\ProgramTA.csproj.GenerateResource.Cache
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Controls.dll
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Video.dll
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Controls.xml
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Video.xml

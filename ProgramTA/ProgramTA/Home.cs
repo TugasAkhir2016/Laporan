@@ -312,12 +312,34 @@ namespace ProgramTA
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
+            if (pictureBox1.Image != null)
+            {
+                Tampil_CItra tmpl = new Tampil_CItra(pictureBox1.Image, "Citra Asli");
+                tmpl.ShowDialog();
+            }
         }
 
         private void Home_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if (pictureBox2.Image != null)
+            {
+                Tampil_CItra tmpl = new Tampil_CItra(pictureBox2.Image, "Citra Asli");
+                tmpl.ShowDialog();
+            }
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            if (pictureBox3.Image != null)
+            {
+                Tampil_CItra tmpl = new Tampil_CItra(pictureBox3.Image, "Citra Asli");
+                tmpl.ShowDialog();
+            }
         }
 
     }

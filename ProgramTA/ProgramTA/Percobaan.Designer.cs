@@ -257,7 +257,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Percobaan";
-            this.Text = "Percobaan";
+            this.Text = "Percobaan Algoritma";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
