@@ -328,7 +328,7 @@ namespace ProgramTA
         {
             if (pictureBox2.Image != null)
             {
-                Tampil_CItra tmpl = new Tampil_CItra(pictureBox2.Image, "Citra Asli");
+                Tampil_CItra tmpl = new Tampil_CItra(pictureBox2.Image, "Citra AFCEDP");
                 tmpl.ShowDialog();
             }
         }
@@ -337,7 +337,7 @@ namespace ProgramTA
         {
             if (pictureBox3.Image != null)
             {
-                Tampil_CItra tmpl = new Tampil_CItra(pictureBox3.Image, "Citra Asli");
+                Tampil_CItra tmpl = new Tampil_CItra(pictureBox3.Image, "Citra ACEDP");
                 tmpl.ShowDialog();
             }
         }
