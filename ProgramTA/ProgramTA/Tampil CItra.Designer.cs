@@ -32,7 +32,6 @@
             this.ComboboxZoom = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.histogram1 = new AForge.Controls.Histogram();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -50,9 +49,12 @@
             this.bnykpixel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.nilaistd = new System.Windows.Forms.Label();
+            this.ddPanBox1 = new DDPanBox.DDPanBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -105,17 +107,6 @@
             this.toolStripButton2.ToolTipText = "Zoom Out";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 45);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(460, 491);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseEnter += new System.EventHandler(this.mouse_enter);
-            // 
             // histogram1
             // 
             this.histogram1.Location = new System.Drawing.Point(18, 19);
@@ -137,6 +128,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ddPanBox1);
             this.groupBox2.Location = new System.Drawing.Point(8, 28);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(472, 516);
@@ -270,6 +262,27 @@
             this.nilaistd.TabIndex = 18;
             this.nilaistd.Text = "label5";
             // 
+            // ddPanBox1
+            // 
+            this.ddPanBox1.Image = null;
+            this.ddPanBox1.Location = new System.Drawing.Point(6, 17);
+            this.ddPanBox1.Name = "ddPanBox1";
+            this.ddPanBox1.Size = new System.Drawing.Size(460, 493);
+            this.ddPanBox1.TabIndex = 19;
+            this.ddPanBox1.Text = "ddPanBox1";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.pictureBox1.Location = new System.Drawing.Point(14, 45);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(460, 493);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.mouse_enter);
+            // 
             // Tampil_CItra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -290,8 +303,8 @@
             this.Controls.Add(this.nilaiaspect);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
             this.MaximizeBox = false;
             this.Name = "Tampil_CItra";
@@ -299,8 +312,9 @@
             this.Load += new System.EventHandler(this.Tampil_CItra_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,7 +324,6 @@
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripComboBox ComboboxZoom;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private AForge.Controls.Histogram histogram1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
@@ -330,5 +343,7 @@
         private System.Windows.Forms.Label bnykpixel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label nilaistd;
+        private DDPanBox.DDPanBox ddPanBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

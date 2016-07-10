@@ -11,6 +11,7 @@ using AForge;
 using AForge.Imaging;
 using AForge.Imaging.Filters;
 using AForge.Math;
+using System.Drawing.Drawing2D;
 
 namespace ProgramTA
 {
@@ -26,10 +27,15 @@ namespace ProgramTA
         private Bitmap Citra { set; get; }
         private string name { set; get; }
         private float aspectratio { set; get; }
+
+        private System.Drawing.Point startingPoint = System.Drawing.Point.Empty;
+        private System.Drawing.Point movingPoint = System.Drawing.Point.Empty;
         
         private void Tampil_CItra_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = Citra;
+            //pictureBox1.Image = Citra;
+            //pictureBox1.Visible = false;
+            ddPanBox1.Image = Citra;
             this.Text = "Tampil Citra - " + name;
             ImageStatistics stat = new ImageStatistics(Citra);
             Histogram hist = stat.Red;
@@ -55,7 +61,8 @@ namespace ProgramTA
                 toolStripButton1.Enabled = false;
                 int n_height = Citra.Height * 2;
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
             else if(ComboboxZoom.SelectedIndex == 2)
             {
@@ -63,13 +70,15 @@ namespace ProgramTA
                 ComboboxZoom.SelectedIndex = 1;
                 int n_height = Convert.ToInt32(Citra.Height * 1.5f);
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
             else if (ComboboxZoom.SelectedIndex == 3)
             {
 
                 ComboboxZoom.SelectedIndex = 2;
-                pictureBox1.Image = Citra;
+                //pictureBox1.Image = Citra;
+                ddPanBox1.Image = Citra;
             }
             else if (ComboboxZoom.SelectedIndex == 4)
             {
@@ -77,7 +86,8 @@ namespace ProgramTA
                 ComboboxZoom.SelectedIndex = 3;
                 int n_height = Convert.ToInt32(Citra.Height * 0.75f);
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
             else if (ComboboxZoom.SelectedIndex == 5)
             {
@@ -86,7 +96,8 @@ namespace ProgramTA
                 toolStripButton2.Enabled = true;
                 int n_height = Convert.ToInt32(Citra.Height * 0.5f);
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
         }
 
@@ -98,26 +109,30 @@ namespace ProgramTA
                 ComboboxZoom.SelectedIndex = 1;
                 int n_height = Convert.ToInt32(Citra.Height * 1.5f);
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
             else if (ComboboxZoom.SelectedIndex == 1)
             {
                 ComboboxZoom.SelectedIndex = 2;
-                pictureBox1.Image = Citra;
+                //pictureBox1.Image = Citra;
+                ddPanBox1.Image = Citra;
             }
             else if (ComboboxZoom.SelectedIndex == 2)
             {
                 ComboboxZoom.SelectedIndex = 3;
                 int n_height = Convert.ToInt32(Citra.Height * 0.75f);
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
             else if (ComboboxZoom.SelectedIndex == 3)
             {
                 ComboboxZoom.SelectedIndex = 4;
                 int n_height = Convert.ToInt32(Citra.Height * 0.5f);
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
             else if (ComboboxZoom.SelectedIndex == 4)
             {
@@ -125,7 +140,8 @@ namespace ProgramTA
                 toolStripButton2.Enabled = false;
                 int n_height = Convert.ToInt32(Citra.Height * 0.25f);
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
         }
 
@@ -137,8 +153,8 @@ namespace ProgramTA
                 toolStripButton2.Enabled = true;
                 int n_height = Citra.Height * 2;
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
-
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
             else if(ComboboxZoom.SelectedIndex == 1)
             {
@@ -146,13 +162,15 @@ namespace ProgramTA
                 toolStripButton2.Enabled = true;
                 int n_height = Convert.ToInt32(Citra.Height * 1.5f);
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
             else if(ComboboxZoom.SelectedIndex == 2)
             {
                 toolStripButton1.Enabled = true;
                 toolStripButton2.Enabled = true;
-                pictureBox1.Image = Citra;
+                //pictureBox1.Image = Citra;
+                ddPanBox1.Image = Citra;
             }
             else if(ComboboxZoom.SelectedIndex == 3)
             {
@@ -160,7 +178,8 @@ namespace ProgramTA
                 toolStripButton2.Enabled = true;
                 int n_height = Convert.ToInt32(Citra.Height * 0.75f);
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
             else if(ComboboxZoom.SelectedIndex == 4)
             {
@@ -168,7 +187,8 @@ namespace ProgramTA
                 toolStripButton2.Enabled = true;
                 int n_height = Convert.ToInt32(Citra.Height * 0.5f);
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
             else if(ComboboxZoom.SelectedIndex == 5)
             {
@@ -176,20 +196,21 @@ namespace ProgramTA
                 toolStripButton2.Enabled = false;
                 int n_height = Convert.ToInt32(Citra.Height * 0.25f);
                 int n_width = Convert.ToInt32(aspectratio * n_height);
-                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
-
+                //pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+                ddPanBox1.Image = new Bitmap(Citra, n_width, n_height);
             }
         }
         private void mouse_enter(object sender,EventArgs e)
         {
             if(ComboboxZoom.SelectedIndex < 2)
             {
-                pictureBox1.Cursor = Cursors.Hand;
+                //pictureBox1.Cursor = Cursors.Hand;
             }
             else
             {
-                pictureBox1.Cursor = Cursors.Default;
+               // pictureBox1.Cursor = Cursors.Default;
             }
         }
+        
     }
 }
