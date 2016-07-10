@@ -81,6 +81,7 @@
             this.ComboboxZoom.Name = "ComboboxZoom";
             this.ComboboxZoom.Size = new System.Drawing.Size(121, 25);
             this.ComboboxZoom.ToolTipText = "Zoom %";
+            this.ComboboxZoom.SelectedIndexChanged += new System.EventHandler(this.ComboboxZoom_SelectedIndexChanged);
             // 
             // toolStripButton1
             // 
@@ -106,12 +107,14 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
             this.pictureBox1.Location = new System.Drawing.Point(13, 45);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(460, 491);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.mouse_enter);
             // 
             // histogram1
             // 

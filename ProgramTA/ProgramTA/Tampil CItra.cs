@@ -38,7 +38,7 @@ namespace ProgramTA
             ComboboxZoom.SelectedIndex = 2;
             aspectratio = Convert.ToSingle((float)Citra.Width / (float)Citra.Height);
             nilaiaspect.Text = aspectratio.ToString("F3");
-            nilaimean.Text = stat.Red.Mean.ToString();
+            nilaimean.Text = stat.Red.Mean.ToString("F3");
             nilaimedian.Text = stat.Red.Median.ToString();
             nilaimin.Text = stat.Red.Min.ToString();
             nilaimax.Text = stat.Red.Max.ToString();
@@ -129,5 +129,67 @@ namespace ProgramTA
             }
         }
 
+        private void ComboboxZoom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ComboboxZoom.SelectedIndex == 0)
+            {
+                toolStripButton1.Enabled = false;
+                toolStripButton2.Enabled = true;
+                int n_height = Citra.Height * 2;
+                int n_width = Convert.ToInt32(aspectratio * n_height);
+                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+
+            }
+            else if(ComboboxZoom.SelectedIndex == 1)
+            {
+                toolStripButton1.Enabled = true;
+                toolStripButton2.Enabled = true;
+                int n_height = Convert.ToInt32(Citra.Height * 1.5f);
+                int n_width = Convert.ToInt32(aspectratio * n_height);
+                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+            }
+            else if(ComboboxZoom.SelectedIndex == 2)
+            {
+                toolStripButton1.Enabled = true;
+                toolStripButton2.Enabled = true;
+                pictureBox1.Image = Citra;
+            }
+            else if(ComboboxZoom.SelectedIndex == 3)
+            {
+                toolStripButton1.Enabled = true;
+                toolStripButton2.Enabled = true;
+                int n_height = Convert.ToInt32(Citra.Height * 0.75f);
+                int n_width = Convert.ToInt32(aspectratio * n_height);
+                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+            }
+            else if(ComboboxZoom.SelectedIndex == 4)
+            {
+                toolStripButton1.Enabled = true;
+                toolStripButton2.Enabled = true;
+                int n_height = Convert.ToInt32(Citra.Height * 0.5f);
+                int n_width = Convert.ToInt32(aspectratio * n_height);
+                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+            }
+            else if(ComboboxZoom.SelectedIndex == 5)
+            {
+                toolStripButton1.Enabled = true;
+                toolStripButton2.Enabled = false;
+                int n_height = Convert.ToInt32(Citra.Height * 0.25f);
+                int n_width = Convert.ToInt32(aspectratio * n_height);
+                pictureBox1.Image = new Bitmap(Citra, n_width, n_height);
+
+            }
+        }
+        private void mouse_enter(object sender,EventArgs e)
+        {
+            if(ComboboxZoom.SelectedIndex < 2)
+            {
+                pictureBox1.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                pictureBox1.Cursor = Cursors.Default;
+            }
+        }
     }
 }
