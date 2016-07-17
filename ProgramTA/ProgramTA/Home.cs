@@ -173,13 +173,13 @@ namespace ProgramTA
                 richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.000").PadRight(6);
             }
             richTextBox2.Text = richTextBox1.Text;
-            richTextBox1.Text += "\n\nDerajat keanggotaan untuk tiap nilai keabuan :\n";
+            richTextBox1.Text += "\n\nDerajat keanggotaan untuk tiap nilai keabuan (μ) :\n";
             for (int i = 0; i < H.Length; i++)
             {
-                richTextBox1.Text += "Low[" + i + "] = " + low[i].ToString().PadRight(10) + "Mid[" + i + "] = " + mid[i].ToString().PadRight(10) + "\t" + "High[" + i + "] = " + high[i].ToString().PadRight(10) + "\n";
+                richTextBox1.Text += "μLow[" + i + "] = " + low[i].ToString().PadRight(10) + "μMid[" + i + "] = " + mid[i].ToString().PadRight(10) + "\t" + "μHigh[" + i + "] = " + high[i].ToString().PadRight(10) + "\n";
                 tlow += low[i] * H[i]; tmid += mid[i] * H[i]; thigh += high[i] * H[i];
             }
-            richTextBox1.Text += "\nLow_part = " + (tlow / (tlow + tmid + thigh)).ToString("0.000") + "\tMid_part = " + (tmid / (tlow + tmid + thigh)).ToString("0.000") + "\tHigh_Part = " + (thigh / (tlow + tmid + thigh)).ToString("0.000") + "\nNilai intensitas referensi citra = low_part * 43 + mid_part * 128 + high_part * 213\n\t";
+            richTextBox1.Text += "\nLow_part = " + (tlow / (tlow + tmid + thigh)).ToString("0.000") + "\tMid_part = " + (tmid / (tlow + tmid + thigh)).ToString("0.000") + "\tHigh_Part = " + (thigh / (tlow + tmid + thigh)).ToString("0.000") + "\nNilai intensitas referensi citra \n= low_part * 43 + mid_part * 128 + high_part * 213\n=";
             richTextBox1.Text += (tlow / (tlow + tmid + thigh)).ToString("0.000") + " * 43 + " + (tmid / (tlow + tmid + thigh)).ToString("0.000") + " * 128 + " + (thigh / (tlow + tmid + thigh)).ToString("0.000") + " * 213 = ";
             intref = Convert.ToInt32(Math.Round((tlow / (tlow + tmid + thigh) * deflow) + (tmid / (tlow + tmid + thigh) * defmid) + (thigh / (tlow + tmid + thigh) * defhigh)));
             richTextBox1.Text += intref + "\n\n";
@@ -190,6 +190,7 @@ namespace ProgramTA
             double cliplimit;
             int[] f1 = new int[256];
             lvlow = 0; lvmid = 0; lvhigh = 0;
+            richTextBox1.Text += "Perhitungan nilai clipping limit untuk tiap intensitas :\n";
             for (int i = 0; i < H.Length; i++)
             {
                 if (aktifK == false)
@@ -205,11 +206,26 @@ namespace ProgramTA
                     lvmid = means(pdf);
                 }
                 cliplimit = (low[intref] * lvlow) + (mid[intref] * lvmid) + (high[intref] * lvhigh);
+                if (i == 0 && aktifK == false)
+                {
+                    richTextBox1.Text += "Levellow = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.000") + " = " + lvlow + "\n"; 
+                    richTextBox1.Text += "Levelmid = Mean(Pdf)\n\t=" + lvmid + "\n";
+                    richTextBox1.Text += "Levelhigh = c2 + Mean(Pdf)\n\t=" + c1 + " + " + lvmid.ToString("0.000") + " = " + lvhigh + "\n";
+                    richTextBox1.Text += "Clipping Limit (CL)= (μLow[" + intref + "] * Levellow) + (μMid[" + intref + "] * Levelmid) + (μHigh[" + intref + "] * Levelhigh\n";
+                    richTextBox1.Text += "CL = (" + low[intref] + " * " + lvlow +") + (" + mid[intref] + " * " + lvmid +") + (" + high[intref] + " * " + lvhigh +") = " + cliplimit + "\n\n";
+                    richTextBox1.Text += "Proses Clipping Histogram :\n";
+                }
+                richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.000") + "\n";
                 if (pdf[i] > cliplimit)
                 {
+                    richTextBox1.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.000") + " > " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] =" + cliplimit.ToString("0.000");
                     npdf1[i] = cliplimit;
                 }
-                else npdf1[i] = pdf[i];
+                else
+                {
+                    richTextBox1.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.000") + " < " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] =" + pdf[i].ToString("0.000");
+                    npdf1[i] = pdf[i];
+                }
                 if (i > 0)
                     ncdf1[i] = ncdf1[i - 1] + npdf1[i];
                 else ncdf1[i] = npdf1[i];

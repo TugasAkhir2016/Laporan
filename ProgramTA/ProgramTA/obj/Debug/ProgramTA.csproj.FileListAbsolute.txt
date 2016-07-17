@@ -34,3 +34,9 @@ D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Controls.dll
 D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Video.dll
 D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Controls.xml
 D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\bin\Debug\AForge.Video.xml
+D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\AForge.xml
+D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\AForge.Controls.xml
+D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\AForge.Imaging.xml
+D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\AForge.Math.xml
+D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\AForge.Video.xml
+D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Tampil_CItra.resources
