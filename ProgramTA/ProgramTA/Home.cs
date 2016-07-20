@@ -14,6 +14,7 @@ namespace ProgramTA
     public partial class Home : Form
     {
         string filename = "";
+        string asfilename = "File";
         double c1;
         double c2;
         int[] f1,f2;
@@ -130,12 +131,19 @@ namespace ProgramTA
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Bitmap bmp = new Bitmap(pictureBox2.Image);
+            bmp.Save(filename);
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.FileName = filename;
+            saveFileDialog1.FileName = asfilename;
+            saveFileDialog1.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|Png Image (.png)|*.png|Tiff Image (.tiff)|*.tiff";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox2.Image.Save(saveFileDialog1.FileName);
+                asfilename = saveFileDialog1.FileName;
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -156,7 +164,8 @@ namespace ProgramTA
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            saveToolStripMenuItem.Enabled = true;
+            saveAsToolStripMenuItem.Enabled = true;
             btn_Show.Enabled = true;
             richTextBox1.Text = ""; richTextBox2.Text = "";
             c1 = (double)numericUpDown1.Value; c2 = (double)numericUpDown2.Value;
@@ -192,10 +201,10 @@ namespace ProgramTA
             richTextBox1.Text += intref + "\n\n";
             newH1 = new int[256]; double[] newHpdf1 = new double[256];
             double[] npdf1 = new double[256];
-            double[] ncdf1  = new double[256];
+            double[] ncdf1 = new double[256];
             double lvlow, lvmid, lvhigh;
             double cliplimit;
-            f1 = new int[256];
+            int[] f1 = new int[256];
             lvlow = 0; lvmid = 0; lvhigh = 0;
             richTextBox1.Text += "Perhitungan nilai clipping limit untuk tiap intensitas :\n";
             for (int i = 0; i < H.Length; i++)
@@ -215,35 +224,59 @@ namespace ProgramTA
                 cliplimit = (low[intref] * lvlow) + (mid[intref] * lvmid) + (high[intref] * lvhigh);
                 if (i == 0 && aktifK == false)
                 {
-                    richTextBox1.Text += "Levellow = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.000") + " = " + lvlow + "\n"; 
+                    richTextBox1.Text += "Levellow = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.000") + " = " + lvlow + "\n";
                     richTextBox1.Text += "Levelmid = Mean(Pdf)\n\t=" + lvmid + "\n";
                     richTextBox1.Text += "Levelhigh = c2 + Mean(Pdf)\n\t=" + c1 + " + " + lvmid.ToString("0.000") + " = " + lvhigh + "\n";
-                    richTextBox1.Text += "Clipping Limit (CL)= (μLow[" + intref + "] * Levellow) + (μMid[" + intref + "] * Levelmid) + (μHigh[" + intref + "] * Levelhigh\n";
-                    richTextBox1.Text += "CL = (" + low[intref] + " * " + lvlow +") + (" + mid[intref] + " * " + lvmid +") + (" + high[intref] + " * " + lvhigh +") = " + cliplimit + "\n\n";
+                    richTextBox1.Text += "Clipping Limit (CL) = (μLow[" + intref + "] * Levellow) + (μMid[" + intref + "] * Levelmid) + (μHigh[" + intref + "] * Levelhigh\n";
+                    richTextBox1.Text += "CL = (" + low[intref] + " * " + lvlow + ") + (" + mid[intref] + " * " + lvmid + ") + (" + high[intref] + " * " + lvhigh + ") = " + cliplimit + "\n\n";
                     richTextBox1.Text += "Proses Clipping Histogram :\n";
                 }
                 richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.000") + "\n";
                 if (pdf[i] > cliplimit)
                 {
-                    richTextBox1.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.000") + " > " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] =" + cliplimit.ToString("0.000");
+                    richTextBox1.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.000") + " > " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] = " + cliplimit.ToString("0.000") + "\n";
                     npdf1[i] = cliplimit;
                 }
                 else
                 {
-                    richTextBox1.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.000") + " < " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] =" + pdf[i].ToString("0.000");
+                    richTextBox1.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.000") + " < " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] = " + pdf[i].ToString("0.000") + "\n";
                     npdf1[i] = pdf[i];
                 }
                 if (i > 0)
+                {
                     ncdf1[i] = ncdf1[i - 1] + npdf1[i];
-                else ncdf1[i] = npdf1[i];
+                    richTextBox1.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf1[i] + "\n\n";
+                }
+                else
+                {
+                    ncdf1[i] = npdf1[i];
+                    richTextBox1.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf1[i] + "\n\n";
+                }
             }
+            richTextBox1.Text += "\nUntuk mendapatkan nilai kumulatif terakhir nCdf[255] = 1, Maka :\n";
             for (int i = 0; i < H.Length; i++)
             {
+                richTextBox1.Text += "nPdf[" + i + "] = " + npdf1[i] + "/" + ncdf1[255] + " = ";
                 npdf1[i] /= ncdf1[255];
+                richTextBox1.Text += npdf1[i] + "\n";
                 if (i > 0)
-                    ncdf1[i] = ncdf1 [i - 1] + npdf1[i];
-                else ncdf1[i] = npdf1[i];
+                {
+                    ncdf1[i] = ncdf1[i - 1] + npdf1[i];
+                    richTextBox1.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf1[i] + "\n\n";
+                }
+                else
+                {
+                    ncdf1[i] = npdf1[i];
+                    richTextBox1.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf1[i] + "\n\n";
+                }
                 f1[i] = Convert.ToInt32(Math.Round(HElowbound + ((HEhibound - HElowbound) * (ncdf1[i] - (npdf1[i] / 2)))));
+            }
+            richTextBox1.Text += "\nPerataan histogram dengan fungsi transformasi dilakukan untuk mendapatkan nilai intensitas baru:\n";
+            richTextBox1.Text += "Nilai X(0) = " + HElowbound + " dan Nilai X(L-1) = " + HEhibound + "\n";
+            for (int i = 0; i < H.Length; i++)
+            {
+                richTextBox1.Text += "new_f[" + i + "] = X(0) + (X(L-1) - X(0)) x (nCdf[" + i + "] - 1/2 nPdf[" + i + "]) = " + f1[i] + "\n";
+                richTextBox1.Text += "Nilai intensitas " + i + "ditransformasi menjadi intensitas baru " + f1[i] + "\n";
             }
             for (int x = 0; x < bmp1.Width; x++)
             {
@@ -258,25 +291,40 @@ namespace ProgramTA
                     totalgr2 += gr;
                 }
             }
+            richTextBox1.Text += "\nSehingga tiap pixel dari citra awal ditransformasi membentuk citra baru dengan nilai Histogram:\n";
+            for (int i = 0; i < H.Length; i++)
+            {
+                richTextBox1.Text += "newH[" + i + "] = " + newH1[i] + "\n";
+            }
             newContrast1 = (double)10f * Math.Log10((double)((double)totalgr1 / (double)(bmp1.Width * bmp1.Height)) - Math.Pow((double)totalgr2 / (double)(bmp1.Width * bmp1.Height), 2));
             pictureBox2.Image = bmp1;
             newH2 = new int[256]; double[] newHpdf2 = new double[256];
             double[] npdf2 = new double[256];
             double[] ncdf2 = new double[256];
-            f2 = new int[256];
+            int[] f2 = new int[256];
             cliplimit = 0;
+            richTextBox2.Text += "\n\nPerhitungan nilai clipping limit untuk tiap intensitas :\n";
             for (int i = 0; i < H.Length; i++)
             {
-                if (aktifK == false)
+                if (aktifK == false && i == 0)
                 {
                     if (totallow > totalmid && totallow > totalhigh)
+                    {
                         cliplimit = (c1) + pdf.Max();
+                        richTextBox2.Text += "Clipping Limit (CL) = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.000") + " = " + cliplimit + "\n";
+                    }
                     else if (totalhigh > totallow && totalhigh > totalmid)
+                    {
                         cliplimit = (c2) + means(pdf);
+                        richTextBox2.Text += "Clipping Limit (CL) = c2 + Mean(Pdf)\n\t=" + c2 + " + " + means(pdf).ToString("0.000") + " = " + cliplimit + "\n";
+                    }
                     else
+                    {
                         cliplimit = means(pdf);
+                        richTextBox2.Text += "Clipping Limit (CL) = Mean(Pdf)\n\t=" + cliplimit + "\n";
+                    }
                 }
-                else
+                else if (aktifK == true)
                 {
                     if (totallow > totalmid && totallow > totalhigh)
                         cliplimit = (c1) * i + pdf.Max();
@@ -287,20 +335,49 @@ namespace ProgramTA
                 }
                 if (pdf[i] > cliplimit)
                 {
-                    npdf2[i] = cliplimit;
+                    richTextBox2.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.000") + " > " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] = " + cliplimit.ToString("0.000") + "\n";
+                    npdf1[i] = cliplimit;
                 }
-                else npdf2[i] = pdf[i];
+                else
+                {
+                    richTextBox2.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.000") + " < " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] = " + pdf[i].ToString("0.000") + "\n";
+                    npdf2[i] = pdf[i];
+                }
                 if (i > 0)
+                {
                     ncdf2[i] = ncdf2[i - 1] + npdf2[i];
-                else ncdf2[i] = npdf2[i];
+                    richTextBox2.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf2[i] + "\n\n";
+                }
+                else
+                {
+                    ncdf2[i] = npdf2[i];
+                    richTextBox2.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf2[i] + "\n\n";
+                }
             }
+            richTextBox2.Text += "\nUntuk mendapatkan nilai kumulatif terakhir nCdf[255] = 1, Maka :\n";
             for (int i = 0; i < H.Length; i++)
             {
+                richTextBox2.Text += "nPdf[" + i + "] = " + npdf2[i] + "/" + ncdf2[255] + " = ";
                 npdf2[i] /= ncdf2[255];
+                richTextBox2.Text += npdf2[i] + "\n";
                 if (i > 0)
+                {
                     ncdf2[i] = ncdf2[i - 1] + npdf2[i];
-                else ncdf2[i] = npdf2[i];
+                    richTextBox2.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf2[i] + "\n\n";
+                }
+                else
+                {
+                    ncdf2[i] = npdf2[i];
+                    richTextBox2.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf2[i] + "\n\n";
+                }
                 f2[i] = Convert.ToInt32(Math.Round(HElowbound + ((HEhibound - HElowbound) * (ncdf2[i] - (npdf2[i] / 2)))));
+            }
+            richTextBox2.Text += "\nPerataan histogram dengan fungsi transformasi dilakukan untuk mendapatkan nilai intensitas baru:\n";
+            richTextBox2.Text += "Nilai X(0) = " + HElowbound + " dan Nilai X(L-1) = " + HEhibound + "\n";
+            for (int i = 0; i < H.Length; i++)
+            {
+                richTextBox2.Text += "new_f[" + i + "] = X(0) + (X(L-1) - X(0)) x (nCdf[" + i + "] - 1/2 nPdf[" + i + "]) = " + f2[i] + "\n";
+                richTextBox2.Text += "Nilai intensitas " + i + "ditransformasi menjadi intensitas baru " + f2[i] + "\n";
             }
             totalgr1 = 0; totalgr2 = 0;
             for (int x = 0; x < bmp2.Width; x++)
@@ -315,6 +392,11 @@ namespace ProgramTA
                     totalgr1 += (gr * gr);
                     totalgr2 += gr;
                 }
+            }
+            richTextBox2.Text += "\nSehingga tiap pixel dari citra awal ditransformasi membentuk citra baru dengan nilai Histogram:\n";
+            for (int i = 0; i < H.Length; i++)
+            {
+                richTextBox2.Text += "newH[" + i + "] = " + newH2[i] + "\n";
             }
             newContrast2 = (double)10f * Math.Log10((double)((double)totalgr1 / (double)(bmp2.Width * bmp2.Height)) - Math.Pow((double)totalgr2 / (double)(bmp2.Width * bmp2.Height), 2));
             pictureBox3.Image = bmp2;
