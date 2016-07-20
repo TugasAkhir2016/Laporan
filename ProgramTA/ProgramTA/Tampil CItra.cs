@@ -18,9 +18,9 @@ namespace ProgramTA
     public partial class Tampil_CItra : Form
     {
 
-        public Tampil_CItra(System.Drawing.Image btmap, string name)
+        public Tampil_CItra(System.Drawing.Bitmap btmap, string name)
         {
-            Citra = (Bitmap)btmap;
+            Citra = btmap;
             this.name = name;
             InitializeComponent();
         }

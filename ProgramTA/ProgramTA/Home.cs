@@ -19,6 +19,8 @@ namespace ProgramTA
         int HElowbound;
         int HEhibound;
         int[] H;
+        int[] newH2;
+        int[] newH1;
         double[] low, mid, high;
         string log1, log2;
         double[] pdf;
@@ -79,9 +81,10 @@ namespace ProgramTA
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.FileName = "File";
-            openFileDialog1.Filter = "Image Files(*.jpg; *.jpeg; *.tif; *.tiff; *.bmp; *.png)|*.jpg; *.jpeg; *.tif; *.tiff; *.bmp; *.png";
+            openFileDialog1.Filter = "Image Files(*.jpg; *.jpeg; *.tif; *.tiff; *.bmp; *.png; *.gif)|*.jpg; *.jpeg; *.tif; *.tiff; *.bmp; *.png; *.gif;";
             if (openFileDialog1.ShowDialog() == DialogResult.OK || openFileDialog1.FileName != "File")
             {
+                button1.Enabled = true;
                 totallow = 0; totalmid = 0; totalhigh = 0;
                 pictureBox1.Image = new Bitmap(openFileDialog1.FileName);
                 Bitmap test = new Bitmap(openFileDialog1.FileName);
@@ -151,6 +154,8 @@ namespace ProgramTA
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            btn_Show.Enabled = true;
             richTextBox1.Text = ""; richTextBox2.Text = "";
             c1 = (double)numericUpDown1.Value; c2 = (double)numericUpDown2.Value;
             HElowbound = Int32.Parse(textBox1.Text); HEhibound = Int32.Parse(textBox2.Text);
@@ -183,7 +188,7 @@ namespace ProgramTA
             richTextBox1.Text += (tlow / (tlow + tmid + thigh)).ToString("0.000") + " * 43 + " + (tmid / (tlow + tmid + thigh)).ToString("0.000") + " * 128 + " + (thigh / (tlow + tmid + thigh)).ToString("0.000") + " * 213 = ";
             intref = Convert.ToInt32(Math.Round((tlow / (tlow + tmid + thigh) * deflow) + (tmid / (tlow + tmid + thigh) * defmid) + (thigh / (tlow + tmid + thigh) * defhigh)));
             richTextBox1.Text += intref + "\n\n";
-            int[] newH1 = new int[256]; double[] newHpdf1 = new double[256];
+            newH1 = new int[256]; double[] newHpdf1 = new double[256];
             double[] npdf1 = new double[256];
             double[] ncdf1  = new double[256];
             double lvlow, lvmid, lvhigh;
@@ -253,7 +258,7 @@ namespace ProgramTA
             }
             newContrast1 = (double)10f * Math.Log10((double)((double)totalgr1 / (double)(bmp1.Width * bmp1.Height)) - Math.Pow((double)totalgr2 / (double)(bmp1.Width * bmp1.Height), 2));
             pictureBox2.Image = bmp1;
-            int[] newH2 = new int[256]; double[] newHpdf2 = new double[256];
+            newH2 = new int[256]; double[] newHpdf2 = new double[256];
             double[] npdf2 = new double[256];
             double[] ncdf2 = new double[256];
             int[] f2 = new int[256];
@@ -330,13 +335,14 @@ namespace ProgramTA
         {
             if (pictureBox1.Image != null)
             {
-                Tampil_CItra tmpl = new Tampil_CItra(pictureBox1.Image, "Citra Asli");
+                Tampil_CItra tmpl = new Tampil_CItra((Bitmap)pictureBox1.Image, "Citra Asli");
                 tmpl.ShowDialog();
             }
         }
 
         private void Home_Load(object sender, EventArgs e)
         {
+            button1.Enabled = false;
 
         }
 
@@ -344,7 +350,7 @@ namespace ProgramTA
         {
             if (pictureBox2.Image != null)
             {
-                Tampil_CItra tmpl = new Tampil_CItra(pictureBox2.Image, "Citra AFCEDP");
+                Tampil_CItra tmpl = new Tampil_CItra((Bitmap)pictureBox2.Image, "Citra AFCEDP");
                 tmpl.ShowDialog();
             }
         }
@@ -353,9 +359,15 @@ namespace ProgramTA
         {
             if (pictureBox3.Image != null)
             {
-                Tampil_CItra tmpl = new Tampil_CItra(pictureBox3.Image, "Citra ACEDP");
+                Tampil_CItra tmpl = new Tampil_CItra((Bitmap)pictureBox3.Image, "Citra ACEDP");
                 tmpl.ShowDialog();
             }
+        }
+
+        private void btn_Show_Click(object sender, EventArgs e)
+        {
+            Log log = new Log(H,newH1,newH2);
+            log.ShowDialog();
         }
 
     }
