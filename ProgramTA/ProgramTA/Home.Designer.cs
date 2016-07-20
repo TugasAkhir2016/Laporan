@@ -35,7 +35,6 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.percobaanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.perbandinganToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -85,7 +84,6 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.percobaanToolStripMenuItem,
-            this.perbandinganToolStripMenuItem,
             this.aboutToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -144,18 +142,12 @@
             this.percobaanToolStripMenuItem.Text = "Percobaan";
             this.percobaanToolStripMenuItem.Click += new System.EventHandler(this.percobaanToolStripMenuItem_Click);
             // 
-            // perbandinganToolStripMenuItem
-            // 
-            this.perbandinganToolStripMenuItem.Name = "perbandinganToolStripMenuItem";
-            this.perbandinganToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.perbandinganToolStripMenuItem.Text = "Perbandingan";
-            this.perbandinganToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
             this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem1.Text = "About";
+            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
             // pictureBox1
             // 
@@ -526,7 +518,6 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem percobaanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem perbandinganToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button1;

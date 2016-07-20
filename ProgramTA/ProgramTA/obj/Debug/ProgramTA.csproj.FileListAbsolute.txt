@@ -40,3 +40,4 @@ D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\AForge.Imaging.xml
 D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\AForge.Math.xml
 D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\AForge.Video.xml
 D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Tampil_CItra.resources
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\ProgramTA.About_Us.resources

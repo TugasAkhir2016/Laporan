@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace ProgramTA
         string filename = "";
         double c1;
         double c2;
+        int[] f1,f2;
         bool aktifK = false;
         int HElowbound;
         int HEhibound;
@@ -193,7 +195,7 @@ namespace ProgramTA
             double[] ncdf1  = new double[256];
             double lvlow, lvmid, lvhigh;
             double cliplimit;
-            int[] f1 = new int[256];
+            f1 = new int[256];
             lvlow = 0; lvmid = 0; lvhigh = 0;
             richTextBox1.Text += "Perhitungan nilai clipping limit untuk tiap intensitas :\n";
             for (int i = 0; i < H.Length; i++)
@@ -261,7 +263,7 @@ namespace ProgramTA
             newH2 = new int[256]; double[] newHpdf2 = new double[256];
             double[] npdf2 = new double[256];
             double[] ncdf2 = new double[256];
-            int[] f2 = new int[256];
+            f2 = new int[256];
             cliplimit = 0;
             for (int i = 0; i < H.Length; i++)
             {
@@ -366,8 +368,14 @@ namespace ProgramTA
 
         private void btn_Show_Click(object sender, EventArgs e)
         {
-            Log log = new Log(H,newH1,newH2);
+            Log log = new Log(H,newH1,newH2,f1,f2);
             log.ShowDialog();
+        }
+
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            About_Us abu = new About_Us();
+            abu.ShowDialog();
         }
 
     }
