@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SortableBindingList.cs" />
     <Compile Include="TabelCoba.cs" />
     <Compile Include="Tampil CItra.cs">
       <SubType>Form</SubType>
