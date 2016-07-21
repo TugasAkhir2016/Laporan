@@ -67,7 +67,7 @@ namespace ProgramTA
             {
                 tabel.Add(new TabelCoba(c.filename, c.c1, c.c2, c.Entropy, c.newEntropy1, c.newEntropy2, c.Contrast, c.newContrast1, c.newContrast2));
             }
-            var bind = new BindingList<TabelCoba>(tabel);
+            var bind = new Library.Forms.SortableBindingList<TabelCoba>(tabel);
             textBox6.Text = ((double)conrerata / (double)coba.Count).ToString();
             textBox4.Text = ((double)conrerata1 / (double)coba.Count).ToString();
             textBox5.Text = ((double)conrerata2 / (double)coba.Count).ToString();
@@ -75,6 +75,55 @@ namespace ProgramTA
             textBox8.Text = ((double)enrerata1 / (double)coba.Count).ToString();
             textBox9.Text = ((double)enrerata2 / (double)coba.Count).ToString();
             dataGridView2.DataSource = bind;
+        }
+
+        private void dataGridView2_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView dtg = sender as DataGridView;
+            DataGridViewColumn newColumn = dtg.Columns[e.ColumnIndex];
+            DataGridViewColumn oldColumn = dtg.SortedColumn;
+            ListSortDirection direction;
+
+            // If oldColumn is null, then the DataGridView is not sorted.
+            if (oldColumn != null)
+            {
+                // Sort the same column again, reversing the SortOrder.
+                if (oldColumn == newColumn &&
+                    dtg.SortOrder == SortOrder.Ascending)
+                {
+                    direction = ListSortDirection.Descending;
+                }
+                else
+                {
+                    // Sort a new column and remove the old SortGlyph.
+                    direction = ListSortDirection.Ascending;
+                    oldColumn.HeaderCell.SortGlyphDirection = SortOrder.None;
+                }
+            }
+            else
+            {
+                direction = ListSortDirection.Ascending;
+            }
+
+            // Sort the selected column.
+            dataGridView2.Sort(newColumn, direction);
+            //if(dtg == dataGridView1)
+            //{
+            //    dataGridView1.Sort(newColumn, direction);
+            //}
+            //else if(dtg == dataGridView2)
+            //{
+            //    dataGridView2.Sort(newColumn, direction);
+            //}
+            //else
+            //{
+            //    dataGridView3.Sort(newColumn, direction);
+            //}
+            newColumn.HeaderCell.SortGlyphDirection =
+                direction == ListSortDirection.Ascending ?
+                SortOrder.Ascending : SortOrder.Descending;
+
+            //this.dataGridView1.Sort(this.dataGridView1.Columns[dtg_Column.Name], ListSortDirection.Ascending)
         }
     }
 }

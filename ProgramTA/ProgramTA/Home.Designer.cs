@@ -68,6 +68,8 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.btn_Show = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.lbl_persen = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -468,11 +470,33 @@
             this.btn_Show.UseVisualStyleBackColor = true;
             this.btn_Show.Click += new System.EventHandler(this.btn_Show_Click);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(402, 348);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(708, 23);
+            this.progressBar1.TabIndex = 34;
+            this.progressBar1.UseWaitCursor = true;
+            this.progressBar1.Visible = false;
+            // 
+            // lbl_persen
+            // 
+            this.lbl_persen.AutoSize = true;
+            this.lbl_persen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_persen.Location = new System.Drawing.Point(1126, 352);
+            this.lbl_persen.Name = "lbl_persen";
+            this.lbl_persen.Size = new System.Drawing.Size(40, 15);
+            this.lbl_persen.TabIndex = 35;
+            this.lbl_persen.Text = "%%%";
+            this.lbl_persen.Visible = false;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 511);
+            this.Controls.Add(this.lbl_persen);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btn_Show);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.richTextBox1);
@@ -553,6 +577,8 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button btn_Show;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label lbl_persen;
     }
 }
 
