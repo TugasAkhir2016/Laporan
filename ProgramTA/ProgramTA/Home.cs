@@ -204,7 +204,7 @@ namespace ProgramTA
             double[] ncdf1 = new double[256];
             double lvlow, lvmid, lvhigh;
             double cliplimit;
-            int[] f1 = new int[256];
+            f1 = new int[256];
             lvlow = 0; lvmid = 0; lvhigh = 0;
             richTextBox1.Text += "Perhitungan nilai clipping limit untuk tiap intensitas :\n";
             for (int i = 0; i < H.Length; i++)
@@ -301,7 +301,7 @@ namespace ProgramTA
             newH2 = new int[256]; double[] newHpdf2 = new double[256];
             double[] npdf2 = new double[256];
             double[] ncdf2 = new double[256];
-            int[] f2 = new int[256];
+            f2 = new int[256];
             cliplimit = 0;
             richTextBox2.Text += "\n\nPerhitungan nilai clipping limit untuk tiap intensitas :\n";
             for (int i = 0; i < H.Length; i++)
