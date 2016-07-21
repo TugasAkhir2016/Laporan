@@ -17,7 +17,8 @@ namespace ProgramTA
         public double c1, c2;
         public CitraCoba(string filename, double[] low, double[] mid, double[] high, int HElowbound, int HEhibound, double c1, double c2, bool aktifK)
         {
-            CitraInput = new Bitmap(filename);
+            Image img = new Bitmap(filename);
+            CitraInput = new Bitmap(img);
             this.filename = filename;
             this.c1 = c1; this.c2 = c2;
             long totalgr1 = 0; long totalgr2 = 0;
