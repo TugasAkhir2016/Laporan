@@ -41,3 +41,18 @@ D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\AForge.Math.xml
 D:\Visual Studio 2012\ProgramTA\ProgramTA\bin\Debug\AForge.Video.xml
 D:\Visual Studio 2012\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Tampil_CItra.resources
 D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\ProgramTA.About_Us.resources
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\bin\Debug\ProgramTA.exe
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\bin\Debug\ProgramTA.pdb
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\bin\Debug\AForge.xml
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\bin\Debug\AForge.Controls.xml
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\bin\Debug\AForge.Imaging.xml
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\bin\Debug\AForge.Math.xml
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\bin\Debug\AForge.Video.xml
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.csprojResolveAssemblyReference.cache
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.About_Us.resources
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Home.resources
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Log.resources
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Percobaan.resources
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Properties.Resources.resources
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Tampil_CItra.resources
+D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.csproj.GenerateResource.Cache

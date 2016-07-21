@@ -18,14 +18,12 @@ namespace ProgramTA
         double c1;
         double c2;
         int[] f1,f2;
-        bool aktifK = false;
         int HElowbound;
         int HEhibound;
         int[] H;
         int[] newH2;
         int[] newH1;
         double[] low, mid, high;
-        string log1, log2;
         double[] pdf;
         int totallow, totalmid, totalhigh;
         public Home()
@@ -170,7 +168,6 @@ namespace ProgramTA
             richTextBox1.Text = ""; richTextBox2.Text = "";
             c1 = (double)numericUpDown1.Value; c2 = (double)numericUpDown2.Value;
             HElowbound = Int32.Parse(textBox1.Text); HEhibound = Int32.Parse(textBox2.Text);
-            log1 = ""; log2 = "";
             Bitmap bmp1 = new Bitmap(pictureBox1.Image);
             Bitmap bmp2 = new Bitmap(pictureBox1.Image);
             long totalgr1 = 0; long totalgr2 = 0;
@@ -203,71 +200,62 @@ namespace ProgramTA
             double[] npdf1 = new double[256];
             double[] ncdf1 = new double[256];
             double lvlow, lvmid, lvhigh;
-            double cliplimit;
+            double cliplimit = 0;
             f1 = new int[256];
             lvlow = 0; lvmid = 0; lvhigh = 0;
             richTextBox1.Text += "Perhitungan nilai clipping limit untuk tiap intensitas :\n";
             for (int i = 0; i < H.Length; i++)
             {
-                if (aktifK == false)
+                if (i == 0)
                 {
                     lvlow = (c1) + pdf.Max();
                     lvhigh = (c2) + means(pdf);
                     lvmid = means(pdf);
-                }
-                else
-                {
-                    lvlow = (c1) * i + pdf.Max();
-                    lvhigh = (c2) * i + means(pdf);
-                    lvmid = means(pdf);
-                }
-                cliplimit = (low[intref] * lvlow) + (mid[intref] * lvmid) + (high[intref] * lvhigh);
-                if (i == 0 && aktifK == false)
-                {
-                    richTextBox1.Text += "Levellow = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.000") + " = " + lvlow + "\n";
-                    richTextBox1.Text += "Levelmid = Mean(Pdf)\n\t=" + lvmid + "\n";
-                    richTextBox1.Text += "Levelhigh = c2 + Mean(Pdf)\n\t=" + c1 + " + " + lvmid.ToString("0.000") + " = " + lvhigh + "\n";
+                    cliplimit = (low[intref] * lvlow) + (mid[intref] * lvmid) + (high[intref] * lvhigh);
+                    richTextBox1.Text += "Levellow = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.000") + " = " + lvlow.ToString("0.00000") + "\n";
+                    richTextBox1.Text += "Levelmid = Mean(Pdf)\n\t=" + lvmid.ToString("0.00000") + "\n";
+                    richTextBox1.Text += "Levelhigh = c2 + Mean(Pdf)\n\t=" + c1 + " + " + lvmid.ToString("0.000") + " = " + lvhigh.ToString("0.00000") + "\n";
                     richTextBox1.Text += "Clipping Limit (CL) = (μLow[" + intref + "] * Levellow) + (μMid[" + intref + "] * Levelmid) + (μHigh[" + intref + "] * Levelhigh\n";
-                    richTextBox1.Text += "CL = (" + low[intref] + " * " + lvlow + ") + (" + mid[intref] + " * " + lvmid + ") + (" + high[intref] + " * " + lvhigh + ") = " + cliplimit + "\n\n";
+                    richTextBox1.Text += "CL = (" + low[intref] + " * " + lvlow.ToString("0.00000") + ") + (" + mid[intref] + " * " + lvmid.ToString("0.00000") + ") + (" + high[intref] + " * " + lvhigh.ToString("0.00000") + ") = " + cliplimit.ToString("0.00000") + "\n\n";
                     richTextBox1.Text += "Proses Clipping Histogram :\n";
                 }
-                richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.000") + "\n";
+                richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
                 if (pdf[i] > cliplimit)
                 {
-                    richTextBox1.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.000") + " > " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] = " + cliplimit.ToString("0.000") + "\n";
+                    richTextBox1.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.00000") + " > " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + cliplimit.ToString("0.00000") + "\n";
                     npdf1[i] = cliplimit;
                 }
                 else
                 {
-                    richTextBox1.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.000") + " < " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] = " + pdf[i].ToString("0.000") + "\n";
+                    richTextBox1.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.00000") + " < " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
                     npdf1[i] = pdf[i];
                 }
                 if (i > 0)
                 {
                     ncdf1[i] = ncdf1[i - 1] + npdf1[i];
-                    richTextBox1.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf1[i] + "\n\n";
+                    richTextBox1.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf1[i].ToString("0.00000") + "\n\n";
                 }
                 else
                 {
                     ncdf1[i] = npdf1[i];
-                    richTextBox1.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf1[i] + "\n\n";
+                    richTextBox1.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf1[i].ToString("0.00000") + "\n\n";
                 }
             }
             richTextBox1.Text += "\nUntuk mendapatkan nilai kumulatif terakhir nCdf[255] = 1, Maka :\n";
             for (int i = 0; i < H.Length; i++)
             {
-                richTextBox1.Text += "nPdf[" + i + "] = " + npdf1[i] + "/" + ncdf1[255] + " = ";
+                richTextBox1.Text += "nPdf[" + i + "] = " + npdf1[i].ToString("0.00000") + "/" + ncdf1[255].ToString("0.00000") + " = ";
                 npdf1[i] /= ncdf1[255];
-                richTextBox1.Text += npdf1[i] + "\n";
+                richTextBox1.Text += npdf1[i].ToString("0.00000") + "\n";
                 if (i > 0)
                 {
                     ncdf1[i] = ncdf1[i - 1] + npdf1[i];
-                    richTextBox1.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf1[i] + "\n\n";
+                    richTextBox1.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf1[i].ToString("0.00000") + "\n\n";
                 }
                 else
                 {
                     ncdf1[i] = npdf1[i];
-                    richTextBox1.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf1[i] + "\n\n";
+                    richTextBox1.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf1[i].ToString("0.00000") + "\n\n";
                 }
                 f1[i] = Convert.ToInt32(Math.Round(HElowbound + ((HEhibound - HElowbound) * (ncdf1[i] - (npdf1[i] / 2)))));
             }
@@ -306,17 +294,17 @@ namespace ProgramTA
             richTextBox2.Text += "\n\nPerhitungan nilai clipping limit untuk tiap intensitas :\n";
             for (int i = 0; i < H.Length; i++)
             {
-                if (aktifK == false && i == 0)
+                if (i == 0)
                 {
                     if (totallow > totalmid && totallow > totalhigh)
                     {
                         cliplimit = (c1) + pdf.Max();
-                        richTextBox2.Text += "Clipping Limit (CL) = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.000") + " = " + cliplimit + "\n";
+                        richTextBox2.Text += "Clipping Limit (CL) = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.00000") + " = " + cliplimit.ToString("0.00000") + "\n";
                     }
                     else if (totalhigh > totallow && totalhigh > totalmid)
                     {
                         cliplimit = (c2) + means(pdf);
-                        richTextBox2.Text += "Clipping Limit (CL) = c2 + Mean(Pdf)\n\t=" + c2 + " + " + means(pdf).ToString("0.000") + " = " + cliplimit + "\n";
+                        richTextBox2.Text += "Clipping Limit (CL) = c2 + Mean(Pdf)\n\t=" + c2 + " + " + means(pdf).ToString("0.00000") + " = " + cliplimit.ToString("0.00000") + "\n";
                     }
                     else
                     {
@@ -324,51 +312,43 @@ namespace ProgramTA
                         richTextBox2.Text += "Clipping Limit (CL) = Mean(Pdf)\n\t=" + cliplimit + "\n";
                     }
                 }
-                else if (aktifK == true)
-                {
-                    if (totallow > totalmid && totallow > totalhigh)
-                        cliplimit = (c1) * i + pdf.Max();
-                    else if (totalhigh > totallow && totalhigh > totalmid)
-                        cliplimit = (c2) * i + means(pdf);
-                    else
-                        cliplimit = means(pdf);
-                }
+                richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
                 if (pdf[i] > cliplimit)
                 {
-                    richTextBox2.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.000") + " > " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] = " + cliplimit.ToString("0.000") + "\n";
-                    npdf1[i] = cliplimit;
+                    richTextBox2.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.00000") + " > " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + cliplimit.ToString("0.00000") + "\n";
+                    npdf2[i] = cliplimit;
                 }
                 else
                 {
-                    richTextBox2.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.000") + " < " + cliplimit.ToString("0.000") + ", Maka nPdf[" + i + "] = " + pdf[i].ToString("0.000") + "\n";
+                    richTextBox2.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.00000") + " < " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
                     npdf2[i] = pdf[i];
                 }
                 if (i > 0)
                 {
                     ncdf2[i] = ncdf2[i - 1] + npdf2[i];
-                    richTextBox2.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf2[i] + "\n\n";
+                    richTextBox2.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf2[i].ToString("0.00000") + "\n\n";
                 }
                 else
                 {
                     ncdf2[i] = npdf2[i];
-                    richTextBox2.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf2[i] + "\n\n";
+                    richTextBox2.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf2[i].ToString("0.00000") + "\n\n";
                 }
             }
             richTextBox2.Text += "\nUntuk mendapatkan nilai kumulatif terakhir nCdf[255] = 1, Maka :\n";
             for (int i = 0; i < H.Length; i++)
             {
-                richTextBox2.Text += "nPdf[" + i + "] = " + npdf2[i] + "/" + ncdf2[255] + " = ";
+                richTextBox2.Text += "nPdf[" + i + "] = " + npdf2[i].ToString("0.00000") + "/" + ncdf2[255].ToString("0.00000") + " = ";
                 npdf2[i] /= ncdf2[255];
-                richTextBox2.Text += npdf2[i] + "\n";
+                richTextBox2.Text += npdf2[i].ToString("0.00000") + "\n";
                 if (i > 0)
                 {
                     ncdf2[i] = ncdf2[i - 1] + npdf2[i];
-                    richTextBox2.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf2[i] + "\n\n";
+                    richTextBox2.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf2[i].ToString("0.00000") + "\n\n";
                 }
                 else
                 {
                     ncdf2[i] = npdf2[i];
-                    richTextBox2.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf2[i] + "\n\n";
+                    richTextBox2.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf2[i].ToString("0.00000") + "\n\n";
                 }
                 f2[i] = Convert.ToInt32(Math.Round(HElowbound + ((HEhibound - HElowbound) * (ncdf2[i] - (npdf2[i] / 2)))));
             }
