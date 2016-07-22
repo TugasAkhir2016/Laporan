@@ -16,5 +16,11 @@ namespace ProgramTA
         {
             InitializeComponent();
         }
+
+        private void About_Us_Load(object sender, EventArgs e)
+        {
+            advRichTextBox1.SelectionAlignment = TextAlign.Justify;
+            advRichTextBox1.SelectAll();
+        }
     }
 }

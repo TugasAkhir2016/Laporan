@@ -117,4 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="advRichTextBox1.Text" xml:space="preserve">
+    <value>Peningkatan kontras dengan pelestarian detail pada citra memainkan peran yang sangat penting di berbagai bidang termasuk bidang medis, militer dan pertanian. Beberapa metode dapat digunakan untuk meningkatkan kontras citra. Namun sering terjadi kehilangan detail citra saat peningkatan kontras terjadi. Untuk itu maka digunakan metode Adaptive Fuzzy Contrast Enhancement Algorithm with Details Preserving untuk meningkatkan kontras citra grayscale dan juga menjaga detail dari citra tersebut. Awalnya, citra yang ingin diuji diproses terlebih dahulu untuk menentukan derajat keanggotaannya. Setelah itu, lakukan perhitungan untuk mendapatkan Clipping Limit dan melakukan perataan histogram yang menggunakan fungsi transformasi histogram dimana fungsi tersebut diyakini lebih baik dari fungsi transformasi konvensional. 
+Tes numerik menunjukkan bahwa algoritma tersebut mampu meningkatkan kontras dan melestarikan detail dari citra. Pengujian dilakukan dengan menggunakan Shannon Entropy  dan Contrast Improvement Evaluation.  
+</value>
+  </data>
 </root>
