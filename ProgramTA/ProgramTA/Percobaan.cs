@@ -46,13 +46,13 @@ namespace ProgramTA
                 conrerata = 0; conrerata1 = 0; conrerata2 = 0; enrerata = 0; enrerata1 = 0; enrerata2 = 0;
                 foreach (string s in System.IO.Directory.GetFiles(folderpath))
                 {
-                    
-                    //if (s.Substring(s.Length - 5, 4) == ".jpg" || s.Substring(s.Length - 5, 4) == ".bmp" || s.Substring(s.Length - 5, 4) == ".png")
-                    //{
                     double c1 = -0.015; double c2 = 0.005;
+                    if (checkBox1.Checked == false)
+                        c1 = (double)numericUpDown1.Value;
                     do
                     {
-                        
+                        if (checkBox2.Checked == false)
+                            c2 = (double)numericUpDown2.Value;
                         do
                         {
                             progressBar1.PerformStep(); progressBar1.Refresh();
@@ -64,11 +64,10 @@ namespace ProgramTA
                             enrerata1 += coba[coba.Count - 1].newEntropy1;
                             enrerata2 += coba[coba.Count - 1].newEntropy2;
                             c1 += 0.001;
-                        } while (c1 <= -0.005);
+                        } while (c1 <= -0.005 && checkBox1.Checked == true);
                         c1 = -0.015;
                         c2 += 0.001;
-                    } while (c2 <= 0.007);
-                    //}
+                    } while (c2 <= 0.007 && checkBox2.Checked == true);
 
                 }
                 List<TabelCoba> tabel = new List<TabelCoba>();
@@ -122,23 +121,25 @@ namespace ProgramTA
 
             // Sort the selected column.
             dataGridView2.Sort(newColumn, direction);
-            //if(dtg == dataGridView1)
-            //{
-            //    dataGridView1.Sort(newColumn, direction);
-            //}
-            //else if(dtg == dataGridView2)
-            //{
-            //    dataGridView2.Sort(newColumn, direction);
-            //}
-            //else
-            //{
-            //    dataGridView3.Sort(newColumn, direction);
-            //}
             newColumn.HeaderCell.SortGlyphDirection =
                 direction == ListSortDirection.Ascending ?
                 SortOrder.Ascending : SortOrder.Descending;
 
             //this.dataGridView1.Sort(this.dataGridView1.Columns[dtg_Column.Name], ListSortDirection.Ascending)
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked == false)
+                numericUpDown2.Enabled = true;
+            else numericUpDown2.Enabled = false;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == false)
+                numericUpDown1.Enabled = true;
+            else numericUpDown1.Enabled = false;
         }
     }
 }
