@@ -167,274 +167,279 @@ namespace ProgramTA
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            Application.DoEvents();
-            progressBar1.Visible = true;
-            lbl_persen.Visible = true;
-            progressBar1.Maximum = H.Length*12;
-            progressBar1.Value = 1;
-            lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString() + " %"; lbl_persen.Refresh();
-            progressBar1.Step=1;
-            saveToolStripMenuItem.Enabled = true;
-            saveAsToolStripMenuItem.Enabled = true;
-            richTextBox1.Text = ""; richTextBox2.Text = "";
-            c1 = (double)numericUpDown1.Value; c2 = (double)numericUpDown2.Value;
-            HElowbound = Int32.Parse(textBox1.Text); HEhibound = Int32.Parse(textBox2.Text);
-            Bitmap bmp1 = new Bitmap(pictureBox1.Image);
-            Bitmap bmp2 = new Bitmap(pictureBox1.Image);
-            long totalgr1 = 0; long totalgr2 = 0;
-            double tlow = 0, tmid = 0, thigh = 0;
-            int intref;
-            int deflow = 43; int defmid = 128; int defhigh = 213;
-            double newEntropy1 = 0; double newEntropy2 = 0; double newContrast1 = 0; double newContrast2 = 0;
-            richTextBox1.Text += "Nilai histogram tiap nilai keabuan :\n";
-            
-            for (int i = 0; i < H.Length; i++)
+            if (Convert.ToInt32(textBox1.Text) >= 0 && Convert.ToInt32(textBox1.Text) <= 255 && Convert.ToInt32(textBox2.Text) >= 0 && Convert.ToInt32(textBox2.Text) <= 255 && Convert.ToInt32(textBox1.Text) < Convert.ToInt32(textBox2.Text))
             {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
-                richTextBox1.Text += "H[" + i + "] = " + H[i].ToString().PadRight(7);
-            }
-            richTextBox1.Text += "\n\nNilai Fungsi probabilitas densitas (pdf) tiap nilai keabuan :\n";
-            for (int i = 0; i < H.Length; i++)
-            {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
-                richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.000").PadRight(6);
-            }
-            richTextBox2.Text = richTextBox1.Text;
-            richTextBox1.Text += "\n\nDerajat keanggotaan untuk tiap nilai keabuan (μ) :\n";
-            for (int i = 0; i < H.Length; i++)
-            {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
-                richTextBox1.Text += "μLow[" + i + "] = " + low[i].ToString().PadRight(10) + "μMid[" + i + "] = " + mid[i].ToString().PadRight(10) + "\t" + "μHigh[" + i + "] = " + high[i].ToString().PadRight(10) + "\n";
-                tlow += low[i] * H[i]; tmid += mid[i] * H[i]; thigh += high[i] * H[i];
-            }
-            richTextBox1.Text += "\nLow_part = " + (tlow / (tlow + tmid + thigh)).ToString("0.000") + "\tMid_part = " + (tmid / (tlow + tmid + thigh)).ToString("0.000") + "\tHigh_Part = " + (thigh / (tlow + tmid + thigh)).ToString("0.000") + "\nNilai intensitas referensi citra \n= low_part * 43 + mid_part * 128 + high_part * 213\n=";
-            richTextBox1.Text += (tlow / (tlow + tmid + thigh)).ToString("0.000") + " * 43 + " + (tmid / (tlow + tmid + thigh)).ToString("0.000") + " * 128 + " + (thigh / (tlow + tmid + thigh)).ToString("0.000") + " * 213 = ";
-            intref = Convert.ToInt32(Math.Round((tlow / (tlow + tmid + thigh) * deflow) + (tmid / (tlow + tmid + thigh) * defmid) + (thigh / (tlow + tmid + thigh) * defhigh)));
-            richTextBox1.Text += intref + "\n\n";
-            newH1 = new int[256]; double[] newHpdf1 = new double[256];
-            double[] npdf1 = new double[256];
-            double[] ncdf1 = new double[256];
-            double lvlow, lvmid, lvhigh;
-            double cliplimit = 0;
-            f1 = new int[256];
-            lvlow = 0; lvmid = 0; lvhigh = 0;
-            richTextBox1.Text += "Perhitungan nilai clipping limit untuk tiap intensitas :\n";
-            for (int i = 0; i < H.Length; i++)
-            {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
-                if (i == 0)
+                Cursor.Current = Cursors.WaitCursor;
+                Application.DoEvents();
+                progressBar1.Visible = true;
+                lbl_persen.Visible = true;
+                progressBar1.Maximum = H.Length * 12;
+                progressBar1.Value = 1;
+                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString() + " %"; lbl_persen.Refresh();
+                progressBar1.Step = 1;
+                saveToolStripMenuItem.Enabled = true;
+                saveAsToolStripMenuItem.Enabled = true;
+                richTextBox1.Text = ""; richTextBox2.Text = "";
+                c1 = (double)numericUpDown1.Value; c2 = (double)numericUpDown2.Value;
+                HElowbound = Int32.Parse(textBox1.Text); HEhibound = Int32.Parse(textBox2.Text);
+                Bitmap bmp1 = new Bitmap(pictureBox1.Image);
+                Bitmap bmp2 = new Bitmap(pictureBox1.Image);
+                long totalgr1 = 0; long totalgr2 = 0;
+                double tlow = 0, tmid = 0, thigh = 0;
+                int intref;
+                int deflow = 43; int defmid = 128; int defhigh = 213;
+                double newEntropy1 = 0; double newEntropy2 = 0; double newContrast1 = 0; double newContrast2 = 0;
+                richTextBox1.Text += "Nilai histogram tiap nilai keabuan :\n";
+
+                for (int i = 0; i < H.Length; i++)
                 {
-                    lvlow = (c1) + pdf.Max();
-                    lvhigh = (c2) + means(pdf);
-                    lvmid = means(pdf);
-                    cliplimit = (low[intref] * lvlow) + (mid[intref] * lvmid) + (high[intref] * lvhigh);
-                    richTextBox1.Text += "Levellow = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.000") + " = " + lvlow.ToString("0.00000") + "\n";
-                    richTextBox1.Text += "Levelmid = Mean(Pdf)\n\t=" + lvmid.ToString("0.00000") + "\n";
-                    richTextBox1.Text += "Levelhigh = c2 + Mean(Pdf)\n\t=" + c1 + " + " + lvmid.ToString("0.000") + " = " + lvhigh.ToString("0.00000") + "\n";
-                    richTextBox1.Text += "Clipping Limit (CL) = (μLow[" + intref + "] * Levellow) + (μMid[" + intref + "] * Levelmid) + (μHigh[" + intref + "] * Levelhigh\n";
-                    richTextBox1.Text += "CL = (" + low[intref] + " * " + lvlow.ToString("0.00000") + ") + (" + mid[intref] + " * " + lvmid.ToString("0.00000") + ") + (" + high[intref] + " * " + lvhigh.ToString("0.00000") + ") = " + cliplimit.ToString("0.00000") + "\n\n";
-                    richTextBox1.Text += "Proses Clipping Histogram :\n";
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
+                    richTextBox1.Text += "H[" + i + "] = " + H[i].ToString().PadRight(7);
                 }
-                richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
-                if (pdf[i] > cliplimit)
+                richTextBox1.Text += "\n\nNilai Fungsi probabilitas densitas (pdf) tiap nilai keabuan :\n";
+                for (int i = 0; i < H.Length; i++)
                 {
-                    richTextBox1.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.00000") + " > " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + cliplimit.ToString("0.00000") + "\n";
-                    npdf1[i] = cliplimit;
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
+                    richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.000").PadRight(6);
                 }
-                else
+                richTextBox2.Text = richTextBox1.Text;
+                richTextBox1.Text += "\n\nDerajat keanggotaan untuk tiap nilai keabuan (μ) :\n";
+                for (int i = 0; i < H.Length; i++)
                 {
-                    richTextBox1.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.00000") + " < " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
-                    npdf1[i] = pdf[i];
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
+                    richTextBox1.Text += "μLow[" + i + "] = " + low[i].ToString().PadRight(10) + "μMid[" + i + "] = " + mid[i].ToString().PadRight(10) + "\t" + "μHigh[" + i + "] = " + high[i].ToString().PadRight(10) + "\n";
+                    tlow += low[i] * H[i]; tmid += mid[i] * H[i]; thigh += high[i] * H[i];
                 }
-                if (i > 0)
+                richTextBox1.Text += "\nLow_part = " + (tlow / (tlow + tmid + thigh)).ToString("0.000") + "\tMid_part = " + (tmid / (tlow + tmid + thigh)).ToString("0.000") + "\tHigh_Part = " + (thigh / (tlow + tmid + thigh)).ToString("0.000") + "\nNilai intensitas referensi citra \n= low_part * 43 + mid_part * 128 + high_part * 213\n=";
+                richTextBox1.Text += (tlow / (tlow + tmid + thigh)).ToString("0.000") + " * 43 + " + (tmid / (tlow + tmid + thigh)).ToString("0.000") + " * 128 + " + (thigh / (tlow + tmid + thigh)).ToString("0.000") + " * 213 = ";
+                intref = Convert.ToInt32(Math.Round((tlow / (tlow + tmid + thigh) * deflow) + (tmid / (tlow + tmid + thigh) * defmid) + (thigh / (tlow + tmid + thigh) * defhigh)));
+                richTextBox1.Text += intref + "\n\n";
+                newH1 = new int[256]; double[] newHpdf1 = new double[256];
+                double[] npdf1 = new double[256];
+                double[] ncdf1 = new double[256];
+                double lvlow, lvmid, lvhigh;
+                double cliplimit = 0;
+                f1 = new int[256];
+                lvlow = 0; lvmid = 0; lvhigh = 0;
+                richTextBox1.Text += "Perhitungan nilai clipping limit untuk tiap intensitas :\n";
+                for (int i = 0; i < H.Length; i++)
                 {
-                    ncdf1[i] = ncdf1[i - 1] + npdf1[i];
-                    richTextBox1.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf1[i].ToString("0.00000") + "\n\n";
-                }
-                else
-                {
-                    ncdf1[i] = npdf1[i];
-                    richTextBox1.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf1[i].ToString("0.00000") + "\n\n";
-                }
-            }
-            richTextBox1.Text += "\nUntuk mendapatkan nilai kumulatif terakhir nCdf[255] = 1, Maka :\n";
-            for (int i = 0; i < H.Length; i++)
-            {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
-                richTextBox1.Text += "nPdf[" + i + "] = " + npdf1[i].ToString("0.00000") + "/" + ncdf1[255].ToString("0.00000") + " = ";
-                npdf1[i] /= ncdf1[255];
-                richTextBox1.Text += npdf1[i].ToString("0.00000") + "\n";
-                if (i > 0)
-                {
-                    ncdf1[i] = ncdf1[i - 1] + npdf1[i];
-                    richTextBox1.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf1[i].ToString("0.00000") + "\n\n";
-                }
-                else
-                {
-                    ncdf1[i] = npdf1[i];
-                    richTextBox1.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf1[i].ToString("0.00000") + "\n\n";
-                }
-                f1[i] = Convert.ToInt32(Math.Round(HElowbound + ((HEhibound - HElowbound) * (ncdf1[i] - (npdf1[i] / 2)))));
-            }
-            richTextBox1.Text += "\nPerataan histogram dengan fungsi transformasi dilakukan untuk mendapatkan nilai intensitas baru:\n";
-            richTextBox1.Text += "Nilai X(0) = " + HElowbound + " dan Nilai X(L-1) = " + HEhibound + "\n";
-            for (int i = 0; i < H.Length; i++)
-            {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
-                richTextBox1.Text += "new_f[" + i + "] = X(0) + (X(L-1) - X(0)) x (nCdf[" + i + "] - 1/2 nPdf[" + i + "]) = " + f1[i] + "\n";
-                richTextBox1.Text += "Nilai intensitas " + i + "ditransformasi menjadi intensitas baru " + f1[i] + "\n";
-            }
-            for (int x = 0; x < bmp1.Width; x++)
-            {
-                for (int y = 0; y < bmp1.Height; y++)
-                {
-                    Color c = bmp1.GetPixel(x, y);
-                    int gr = f1[(int)c.R];
-                    Color g = Color.FromArgb(gr, gr, gr);
-                    bmp1.SetPixel(x, y, g);
-                    newH1[gr]++;
-                    totalgr1 += (gr * gr);
-                    totalgr2 += gr;
-                }
-            }
-            richTextBox1.Text += "\nSehingga tiap pixel dari citra awal ditransformasi membentuk citra baru dengan nilai Histogram:\n";
-            for (int i = 0; i < H.Length; i++)
-            {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
-                richTextBox1.Text += "newH[" + i + "] = " + newH1[i] + "\n";
-            }
-            newContrast1 = (double)10f * Math.Log10((double)((double)totalgr1 / (double)(bmp1.Width * bmp1.Height)) - Math.Pow((double)totalgr2 / (double)(bmp1.Width * bmp1.Height), 2));
-            pictureBox2.Image = bmp1;
-            newH2 = new int[256]; double[] newHpdf2 = new double[256];
-            double[] npdf2 = new double[256];
-            double[] ncdf2 = new double[256];
-            f2 = new int[256];
-            cliplimit = 0;
-            richTextBox2.Text += "\n\nPerhitungan nilai clipping limit untuk tiap intensitas :\n";
-            for (int i = 0; i < H.Length; i++)
-            {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
-                if (i == 0)
-                {
-                    if (totallow > totalmid && totallow > totalhigh)
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
+                    if (i == 0)
                     {
-                        cliplimit = (c1) + pdf.Max();
-                        richTextBox2.Text += "Clipping Limit (CL) = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.00000") + " = " + cliplimit.ToString("0.00000") + "\n";
+                        lvlow = (c1) + pdf.Max();
+                        lvhigh = (c2) + means(pdf);
+                        lvmid = means(pdf);
+                        cliplimit = (low[intref] * lvlow) + (mid[intref] * lvmid) + (high[intref] * lvhigh);
+                        richTextBox1.Text += "Levellow = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.000") + " = " + lvlow.ToString("0.00000") + "\n";
+                        richTextBox1.Text += "Levelmid = Mean(Pdf)\n\t=" + lvmid.ToString("0.00000") + "\n";
+                        richTextBox1.Text += "Levelhigh = c2 + Mean(Pdf)\n\t=" + c1 + " + " + lvmid.ToString("0.000") + " = " + lvhigh.ToString("0.00000") + "\n";
+                        richTextBox1.Text += "Clipping Limit (CL) = (μLow[" + intref + "] * Levellow) + (μMid[" + intref + "] * Levelmid) + (μHigh[" + intref + "] * Levelhigh\n";
+                        richTextBox1.Text += "CL = (" + low[intref] + " * " + lvlow.ToString("0.00000") + ") + (" + mid[intref] + " * " + lvmid.ToString("0.00000") + ") + (" + high[intref] + " * " + lvhigh.ToString("0.00000") + ") = " + cliplimit.ToString("0.00000") + "\n\n";
+                        richTextBox1.Text += "Proses Clipping Histogram :\n";
                     }
-                    else if (totalhigh > totallow && totalhigh > totalmid)
+                    richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
+                    if (pdf[i] > cliplimit)
                     {
-                        cliplimit = (c2) + means(pdf);
-                        richTextBox2.Text += "Clipping Limit (CL) = c2 + Mean(Pdf)\n\t=" + c2 + " + " + means(pdf).ToString("0.00000") + " = " + cliplimit.ToString("0.00000") + "\n";
+                        richTextBox1.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.00000") + " > " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + cliplimit.ToString("0.00000") + "\n";
+                        npdf1[i] = cliplimit;
                     }
                     else
                     {
-                        cliplimit = means(pdf);
-                        richTextBox2.Text += "Clipping Limit (CL) = Mean(Pdf)\n\t=" + cliplimit + "\n";
+                        richTextBox1.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.00000") + " < " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
+                        npdf1[i] = pdf[i];
+                    }
+                    if (i > 0)
+                    {
+                        ncdf1[i] = ncdf1[i - 1] + npdf1[i];
+                        richTextBox1.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf1[i].ToString("0.00000") + "\n\n";
+                    }
+                    else
+                    {
+                        ncdf1[i] = npdf1[i];
+                        richTextBox1.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf1[i].ToString("0.00000") + "\n\n";
                     }
                 }
-                richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
-                if (pdf[i] > cliplimit)
+                richTextBox1.Text += "\nUntuk mendapatkan nilai kumulatif terakhir nCdf[255] = 1, Maka :\n";
+                for (int i = 0; i < H.Length; i++)
                 {
-                    richTextBox2.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.00000") + " > " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + cliplimit.ToString("0.00000") + "\n";
-                    npdf2[i] = cliplimit;
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
+                    richTextBox1.Text += "nPdf[" + i + "] = " + npdf1[i].ToString("0.00000") + "/" + ncdf1[255].ToString("0.00000") + " = ";
+                    npdf1[i] /= ncdf1[255];
+                    richTextBox1.Text += npdf1[i].ToString("0.00000") + "\n";
+                    if (i > 0)
+                    {
+                        ncdf1[i] = ncdf1[i - 1] + npdf1[i];
+                        richTextBox1.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf1[i].ToString("0.00000") + "\n\n";
+                    }
+                    else
+                    {
+                        ncdf1[i] = npdf1[i];
+                        richTextBox1.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf1[i].ToString("0.00000") + "\n\n";
+                    }
+                    f1[i] = Convert.ToInt32(Math.Round(HElowbound + ((HEhibound - HElowbound) * (ncdf1[i] - (npdf1[i] / 2)))));
                 }
-                else
+                richTextBox1.Text += "\nPerataan histogram dengan fungsi transformasi dilakukan untuk mendapatkan nilai intensitas baru:\n";
+                richTextBox1.Text += "Nilai X(0) = " + HElowbound + " dan Nilai X(L-1) = " + HEhibound + "\n";
+                for (int i = 0; i < H.Length; i++)
                 {
-                    richTextBox2.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.00000") + " < " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
-                    npdf2[i] = pdf[i];
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
+                    richTextBox1.Text += "new_f[" + i + "] = X(0) + (X(L-1) - X(0)) x (nCdf[" + i + "] - 1/2 nPdf[" + i + "]) = " + f1[i] + "\n";
+                    richTextBox1.Text += "Nilai intensitas " + i + "ditransformasi menjadi intensitas baru " + f1[i] + "\n";
                 }
-                if (i > 0)
+                for (int x = 0; x < bmp1.Width; x++)
                 {
-                    ncdf2[i] = ncdf2[i - 1] + npdf2[i];
-                    richTextBox2.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf2[i].ToString("0.00000") + "\n\n";
+                    for (int y = 0; y < bmp1.Height; y++)
+                    {
+                        Color c = bmp1.GetPixel(x, y);
+                        int gr = f1[(int)c.R];
+                        Color g = Color.FromArgb(gr, gr, gr);
+                        bmp1.SetPixel(x, y, g);
+                        newH1[gr]++;
+                        totalgr1 += (gr * gr);
+                        totalgr2 += gr;
+                    }
                 }
-                else
+                richTextBox1.Text += "\nSehingga tiap pixel dari citra awal ditransformasi membentuk citra baru dengan nilai Histogram:\n";
+                for (int i = 0; i < H.Length; i++)
                 {
-                    ncdf2[i] = npdf2[i];
-                    richTextBox2.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf2[i].ToString("0.00000") + "\n\n";
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
+                    richTextBox1.Text += "newH[" + i + "] = " + newH1[i] + "\n";
                 }
+                newContrast1 = (double)10f * Math.Log10((double)((double)totalgr1 / (double)(bmp1.Width * bmp1.Height)) - Math.Pow((double)totalgr2 / (double)(bmp1.Width * bmp1.Height), 2));
+                pictureBox2.Image = bmp1;
+                newH2 = new int[256]; double[] newHpdf2 = new double[256];
+                double[] npdf2 = new double[256];
+                double[] ncdf2 = new double[256];
+                f2 = new int[256];
+                cliplimit = 0;
+                richTextBox2.Text += "\n\nPerhitungan nilai clipping limit untuk tiap intensitas :\n";
+                for (int i = 0; i < H.Length; i++)
+                {
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
+                    if (i == 0)
+                    {
+                        if (totallow > totalmid && totallow > totalhigh)
+                        {
+                            cliplimit = (c1) + pdf.Max();
+                            richTextBox2.Text += "Clipping Limit (CL) = c1 + Max(Pdf)\n\t=" + c1 + " + " + pdf.Max().ToString("0.00000") + " = " + cliplimit.ToString("0.00000") + "\n";
+                        }
+                        else if (totalhigh > totallow && totalhigh > totalmid)
+                        {
+                            cliplimit = (c2) + means(pdf);
+                            richTextBox2.Text += "Clipping Limit (CL) = c2 + Mean(Pdf)\n\t=" + c2 + " + " + means(pdf).ToString("0.00000") + " = " + cliplimit.ToString("0.00000") + "\n";
+                        }
+                        else
+                        {
+                            cliplimit = means(pdf);
+                            richTextBox2.Text += "Clipping Limit (CL) = Mean(Pdf)\n\t=" + cliplimit + "\n";
+                        }
+                    }
+                    richTextBox1.Text += "Pdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
+                    if (pdf[i] > cliplimit)
+                    {
+                        richTextBox2.Text += "Pdf[" + i + "] > CL dimana " + pdf[i].ToString("0.00000") + " > " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + cliplimit.ToString("0.00000") + "\n";
+                        npdf2[i] = cliplimit;
+                    }
+                    else
+                    {
+                        richTextBox2.Text += "Pdf[" + i + "] < CL dimana " + pdf[i].ToString("0.00000") + " < " + cliplimit.ToString("0.00000") + ", Maka nPdf[" + i + "] = " + pdf[i].ToString("0.00000") + "\n";
+                        npdf2[i] = pdf[i];
+                    }
+                    if (i > 0)
+                    {
+                        ncdf2[i] = ncdf2[i - 1] + npdf2[i];
+                        richTextBox2.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf2[i].ToString("0.00000") + "\n\n";
+                    }
+                    else
+                    {
+                        ncdf2[i] = npdf2[i];
+                        richTextBox2.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf2[i].ToString("0.00000") + "\n\n";
+                    }
+                }
+                richTextBox2.Text += "\nUntuk mendapatkan nilai kumulatif terakhir nCdf[255] = 1, Maka :\n";
+                for (int i = 0; i < H.Length; i++)
+                {
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
+                    richTextBox2.Text += "nPdf[" + i + "] = " + npdf2[i].ToString("0.00000") + "/" + ncdf2[255].ToString("0.00000") + " = ";
+                    npdf2[i] /= ncdf2[255];
+                    richTextBox2.Text += npdf2[i].ToString("0.00000") + "\n";
+                    if (i > 0)
+                    {
+                        ncdf2[i] = ncdf2[i - 1] + npdf2[i];
+                        richTextBox2.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf2[i].ToString("0.00000") + "\n\n";
+                    }
+                    else
+                    {
+                        ncdf2[i] = npdf2[i];
+                        richTextBox2.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf2[i].ToString("0.00000") + "\n\n";
+                    }
+                    f2[i] = Convert.ToInt32(Math.Round(HElowbound + ((HEhibound - HElowbound) * (ncdf2[i] - (npdf2[i] / 2)))));
+                }
+                richTextBox2.Text += "\nPerataan histogram dengan fungsi transformasi dilakukan untuk mendapatkan nilai intensitas baru:\n";
+                richTextBox2.Text += "Nilai X(0) = " + HElowbound + " dan Nilai X(L-1) = " + HEhibound + "\n";
+                for (int i = 0; i < H.Length; i++)
+                {
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
+                    richTextBox2.Text += "new_f[" + i + "] = X(0) + (X(L-1) - X(0)) x (nCdf[" + i + "] - 1/2 nPdf[" + i + "]) = " + f2[i] + "\n";
+                    richTextBox2.Text += "Nilai intensitas " + i + "ditransformasi menjadi intensitas baru " + f2[i] + "\n";
+                }
+                totalgr1 = 0; totalgr2 = 0;
+                for (int x = 0; x < bmp2.Width; x++)
+                {
+                    for (int y = 0; y < bmp2.Height; y++)
+                    {
+                        Color c = bmp2.GetPixel(x, y);
+                        int gr = f2[(int)c.R];
+                        Color g = Color.FromArgb(gr, gr, gr);
+                        bmp2.SetPixel(x, y, g);
+                        newH2[gr]++;
+                        totalgr1 += (gr * gr);
+                        totalgr2 += gr;
+                    }
+                }
+                richTextBox2.Text += "\nSehingga tiap pixel dari citra awal ditransformasi membentuk citra baru dengan nilai Histogram:\n";
+                for (int i = 0; i < H.Length; i++)
+                {
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
+                    richTextBox2.Text += "newH[" + i + "] = " + newH2[i] + "\n";
+                }
+                newContrast2 = (double)10f * Math.Log10((double)((double)totalgr1 / (double)(bmp2.Width * bmp2.Height)) - Math.Pow((double)totalgr2 / (double)(bmp2.Width * bmp2.Height), 2));
+                pictureBox3.Image = bmp2;
+                for (int i = 0; i < H.Length; i++)
+                {
+                    progressBar1.PerformStep(); progressBar1.Refresh();
+                    lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString() + " %"; lbl_persen.Refresh();
+                    newHpdf1[i] = (double)newH1[i] / (double)newH1.Sum();
+                    newHpdf2[i] = (double)newH2[i] / (double)newH2.Sum();
+                    if (newHpdf1[i] > 0)
+                        newEntropy1 += ((double)(-1) * (double)newHpdf1[i] * (double)Math.Log(newHpdf1[i], 2));
+                    if (newHpdf2[i] > 0)
+                        newEntropy2 += ((double)(-1) * (double)newHpdf2[i] * (double)Math.Log(newHpdf2[i], 2));
+                }
+                textBox4.Text = newEntropy1.ToString();
+                textBox5.Text = newEntropy2.ToString();
+                textBox7.Text = newContrast1.ToString();
+                textBox8.Text = newContrast2.ToString();
+                btn_Show.Enabled = true;
+                Cursor.Current = Cursors.Default;
+                progressBar1.Visible = false;
+                lbl_persen.Visible = false;
+                this.UseWaitCursor = false;
             }
-            richTextBox2.Text += "\nUntuk mendapatkan nilai kumulatif terakhir nCdf[255] = 1, Maka :\n";
-            for (int i = 0; i < H.Length; i++)
-            {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
-                richTextBox2.Text += "nPdf[" + i + "] = " + npdf2[i].ToString("0.00000") + "/" + ncdf2[255].ToString("0.00000") + " = ";
-                npdf2[i] /= ncdf2[255];
-                richTextBox2.Text += npdf2[i].ToString("0.00000") + "\n";
-                if (i > 0)
-                {
-                    ncdf2[i] = ncdf2[i - 1] + npdf2[i];
-                    richTextBox2.Text += "nCdf[" + i + "] = nCdf[" + (i - 1) + "] + nPdf[" + i + "] = " + ncdf2[i].ToString("0.00000") + "\n\n";
-                }
-                else
-                {
-                    ncdf2[i] = npdf2[i];
-                    richTextBox2.Text += "nCdf[" + i + "] = nPdf[0] = " + ncdf2[i].ToString("0.00000") + "\n\n";
-                }
-                f2[i] = Convert.ToInt32(Math.Round(HElowbound + ((HEhibound - HElowbound) * (ncdf2[i] - (npdf2[i] / 2)))));
-            }
-            richTextBox2.Text += "\nPerataan histogram dengan fungsi transformasi dilakukan untuk mendapatkan nilai intensitas baru:\n";
-            richTextBox2.Text += "Nilai X(0) = " + HElowbound + " dan Nilai X(L-1) = " + HEhibound + "\n";
-            for (int i = 0; i < H.Length; i++)
-            {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
-                richTextBox2.Text += "new_f[" + i + "] = X(0) + (X(L-1) - X(0)) x (nCdf[" + i + "] - 1/2 nPdf[" + i + "]) = " + f2[i] + "\n";
-                richTextBox2.Text += "Nilai intensitas " + i + "ditransformasi menjadi intensitas baru " + f2[i] + "\n";
-            }
-            totalgr1 = 0; totalgr2 = 0;
-            for (int x = 0; x < bmp2.Width; x++)
-            {
-                for (int y = 0; y < bmp2.Height; y++)
-                {
-                    Color c = bmp2.GetPixel(x, y);
-                    int gr = f2[(int)c.R];
-                    Color g = Color.FromArgb(gr, gr, gr);
-                    bmp2.SetPixel(x, y, g);
-                    newH2[gr]++;
-                    totalgr1 += (gr * gr);
-                    totalgr2 += gr;
-                }
-            }
-            richTextBox2.Text += "\nSehingga tiap pixel dari citra awal ditransformasi membentuk citra baru dengan nilai Histogram:\n";
-            for (int i = 0; i < H.Length; i++)
-            {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString("F2") + " %"; lbl_persen.Refresh();
-                richTextBox2.Text += "newH[" + i + "] = " + newH2[i] + "\n";
-            }
-            newContrast2 = (double)10f * Math.Log10((double)((double)totalgr1 / (double)(bmp2.Width * bmp2.Height)) - Math.Pow((double)totalgr2 / (double)(bmp2.Width * bmp2.Height), 2));
-            pictureBox3.Image = bmp2;
-            for (int i = 0; i < H.Length; i++)
-            {
-                progressBar1.PerformStep(); progressBar1.Refresh();
-                lbl_persen.Text = percen(progressBar1.Value, progressBar1.Maximum).ToString() + " %"; lbl_persen.Refresh();
-                newHpdf1[i] = (double)newH1[i] / (double)newH1.Sum();
-                newHpdf2[i] = (double)newH2[i] / (double)newH2.Sum();
-                if (newHpdf1[i] > 0)
-                    newEntropy1 += ((double)(-1) * (double)newHpdf1[i] * (double)Math.Log(newHpdf1[i], 2));
-                if (newHpdf2[i] > 0)
-                    newEntropy2 += ((double)(-1) * (double)newHpdf2[i] * (double)Math.Log(newHpdf2[i], 2));
-            }
-            textBox4.Text = newEntropy1.ToString(); 
-            textBox5.Text = newEntropy2.ToString();
-            textBox7.Text = newContrast1.ToString(); 
-            textBox8.Text = newContrast2.ToString();
-            btn_Show.Enabled = true;
-            Cursor.Current = Cursors.Default;
-            progressBar1.Visible = false;
-            lbl_persen.Visible = false;
-            this.UseWaitCursor = false;
+            else
+                MessageBox.Show("Batas bawah dan atas HE harus memiliki nilai didalam range 0 hingga 255\nBatas bawah HE tidak boleh lebih besar dari batas atas HE");
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
