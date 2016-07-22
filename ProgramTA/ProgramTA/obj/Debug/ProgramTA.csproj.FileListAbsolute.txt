@@ -56,3 +56,4 @@ D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Percobaan.resources
 D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Properties.Resources.resources
 D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.Tampil_CItra.resources
 D:\GitHub\TA\Laporan\ProgramTA\ProgramTA\obj\Debug\ProgramTA.csproj.GenerateResource.Cache
+D:\Study\Tugas Akhir\Repo\ProgramTA\ProgramTA\obj\Debug\AdvRichTextBox.resources

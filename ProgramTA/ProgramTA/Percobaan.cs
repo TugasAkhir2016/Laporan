@@ -26,6 +26,7 @@ namespace ProgramTA
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button2.Enabled = true;
             if (folderpath != "")
                 folderBrowserDialog1.SelectedPath = folderpath;
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
@@ -39,7 +40,23 @@ namespace ProgramTA
         private void button2_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            progressBar1.Visible = true; progressBar1.Maximum = System.IO.Directory.GetFiles(folderpath).Length * 30;
+            progressBar1.Visible = true;
+            if (checkBox1.Checked && checkBox2.Checked)
+            {
+                progressBar1.Maximum = System.IO.Directory.GetFiles(folderpath).Length * 30;
+            }
+            else if (checkBox1.Checked)
+            {
+                progressBar1.Maximum = System.IO.Directory.GetFiles(folderpath).Length * 10;
+            }
+            else if(checkBox2.Checked)
+            {
+                progressBar1.Maximum = System.IO.Directory.GetFiles(folderpath).Length * 3;
+            }
+            else
+            {
+                progressBar1.Maximum = System.IO.Directory.GetFiles(folderpath).Length;
+            }
             progressBar1.Value = 1; progressBar1.Step = 1;
             if (Convert.ToInt32(textBox3.Text) >= 0 && Convert.ToInt32(textBox3.Text) <= 255 && Convert.ToInt32(textBox2.Text) >= 0 && Convert.ToInt32(textBox2.Text) <= 255 && Convert.ToInt32(textBox3.Text) < Convert.ToInt32(textBox2.Text))
             {
@@ -73,7 +90,7 @@ namespace ProgramTA
                 List<TabelCoba> tabel = new List<TabelCoba>();
                 foreach (CitraCoba c in coba)
                 {
-                    tabel.Add(new TabelCoba(Path.GetFileName(c.filename), c.c1, c.c2, c.Entropy, c.newEntropy1, c.newEntropy2, c.Contrast, c.newContrast1, c.newContrast2));
+                    tabel.Add(new TabelCoba(c.filename, c.c1, c.c2, c.Entropy, c.newEntropy1, c.newEntropy2, c.Contrast, c.newContrast1, c.newContrast2));
                 }
                 var bind = new Library.Forms.SortableBindingList<TabelCoba>(tabel);
                 textBox6.Text = ((double)conrerata / (double)coba.Count).ToString();
