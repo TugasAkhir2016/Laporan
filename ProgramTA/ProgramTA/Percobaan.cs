@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,18 +38,24 @@ namespace ProgramTA
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(textBox1.Text) >= 0 && Convert.ToInt32(textBox1.Text) <= 255 && Convert.ToInt32(textBox2.Text) >= 0 && Convert.ToInt32(textBox2.Text) <= 255 && Convert.ToInt32(textBox1.Text) < Convert.ToInt32(textBox2.Text))
+            Cursor.Current = Cursors.WaitCursor;
+            progressBar1.Visible = true; progressBar1.Maximum = System.IO.Directory.GetFiles(folderpath).Length * 30;
+            progressBar1.Value = 1; progressBar1.Step = 1;
+            if (Convert.ToInt32(textBox3.Text) >= 0 && Convert.ToInt32(textBox3.Text) <= 255 && Convert.ToInt32(textBox2.Text) >= 0 && Convert.ToInt32(textBox2.Text) <= 255 && Convert.ToInt32(textBox3.Text) < Convert.ToInt32(textBox2.Text))
             {
                 conrerata = 0; conrerata1 = 0; conrerata2 = 0; enrerata = 0; enrerata1 = 0; enrerata2 = 0;
                 foreach (string s in System.IO.Directory.GetFiles(folderpath))
                 {
+                    
                     //if (s.Substring(s.Length - 5, 4) == ".jpg" || s.Substring(s.Length - 5, 4) == ".bmp" || s.Substring(s.Length - 5, 4) == ".png")
                     //{
                     double c1 = -0.015; double c2 = 0.005;
                     do
                     {
+                        
                         do
                         {
+                            progressBar1.PerformStep(); progressBar1.Refresh();
                             coba.Add(new CitraCoba(s, low, mid, high, Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), c1, c2, false));
                             conrerata += coba[coba.Count - 1].Contrast;
                             conrerata1 += coba[coba.Count - 1].newContrast1;
@@ -56,10 +63,10 @@ namespace ProgramTA
                             enrerata += coba[coba.Count - 1].Entropy;
                             enrerata1 += coba[coba.Count - 1].newEntropy1;
                             enrerata2 += coba[coba.Count - 1].newEntropy2;
-                            c1 += 0.001f;
+                            c1 += 0.001;
                         } while (c1 <= -0.005);
                         c1 = -0.015;
-                        c2 += 0.001f;
+                        c2 += 0.001;
                     } while (c2 <= 0.007);
                     //}
 
@@ -67,7 +74,7 @@ namespace ProgramTA
                 List<TabelCoba> tabel = new List<TabelCoba>();
                 foreach (CitraCoba c in coba)
                 {
-                    tabel.Add(new TabelCoba(c.filename, c.c1, c.c2, c.Entropy, c.newEntropy1, c.newEntropy2, c.Contrast, c.newContrast1, c.newContrast2));
+                    tabel.Add(new TabelCoba(Path.GetFileName(c.filename), c.c1, c.c2, c.Entropy, c.newEntropy1, c.newEntropy2, c.Contrast, c.newContrast1, c.newContrast2));
                 }
                 var bind = new Library.Forms.SortableBindingList<TabelCoba>(tabel);
                 textBox6.Text = ((double)conrerata / (double)coba.Count).ToString();
@@ -77,6 +84,9 @@ namespace ProgramTA
                 textBox8.Text = ((double)enrerata1 / (double)coba.Count).ToString();
                 textBox9.Text = ((double)enrerata2 / (double)coba.Count).ToString();
                 dataGridView2.DataSource = bind;
+                progressBar1.Visible = false;
+
+                Cursor.Current = Cursors.Default;
             }
             else
                 MessageBox.Show("Batas bawah dan atas HE harus memiliki nilai didalam range 0 hingga 255\nBatas bawah HE tidak boleh lebih besar dari batas atas HE");
