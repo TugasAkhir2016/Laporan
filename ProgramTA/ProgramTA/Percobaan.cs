@@ -65,12 +65,12 @@ namespace ProgramTA
                 foreach (string s in System.IO.Directory.GetFiles(folderpath))
                 {
                     double c1 = -0.015; double c2 = 0.005;
-                    
+
                     do
                     {
                         if (checkBox1.Checked == false)
                             c1 = (double)numericUpDown1.Value;
-                    
+
                         if (checkBox2.Checked == false)
                             c2 = (double)numericUpDown2.Value;
                         
