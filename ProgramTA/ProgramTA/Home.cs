@@ -153,6 +153,7 @@ namespace ProgramTA
         {
             Percobaan percobaan = new Percobaan(low, mid, high);
             percobaan.ShowDialog();
+            
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

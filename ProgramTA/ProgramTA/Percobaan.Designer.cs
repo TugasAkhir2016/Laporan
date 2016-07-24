@@ -407,6 +407,7 @@
             this.Name = "Percobaan";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Percobaan Algoritma";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Percobaan_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
