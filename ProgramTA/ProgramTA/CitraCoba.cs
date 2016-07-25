@@ -13,7 +13,7 @@ namespace ProgramTA
         public Bitmap CitraInput, CitraOutput1, CitraOutput2;
         private int[] H = new int[256];
         private double[] low, mid, high;
-        public double Entropy, newEntropy1, newEntropy2, Contrast, newContrast1, newContrast2;
+        public double Entropy, Entropy_AFCEDP, Entropy_ACEDP, Contrast, Contrast_AFCEDP, Contrast_ACEDP;
         public double c1, c2;
         public CitraCoba(string filename, double[] low, double[] mid, double[] high, int HElowbound, int HEhibound, double c1, double c2, bool aktifK)
         {
@@ -104,7 +104,7 @@ namespace ProgramTA
                     totalgr2 += gr;
                 }
             }
-            newContrast1 = (double)10f * Math.Log10((double)((double)totalgr1 / (double)(CitraOutput1.Width * CitraOutput1.Height)) - Math.Pow((double)totalgr2 / (double)(CitraOutput1.Width * CitraOutput1.Height), 2));
+            Contrast_AFCEDP = (double)10f * Math.Log10((double)((double)totalgr1 / (double)(CitraOutput1.Width * CitraOutput1.Height)) - Math.Pow((double)totalgr2 / (double)(CitraOutput1.Width * CitraOutput1.Height), 2));
             int[] newH2 = new int[256]; double[] newHpdf2 = new double[256];
             double[] npdf2 = new double[256];
             double[] ncdf2 = new double[256];
@@ -161,7 +161,7 @@ namespace ProgramTA
                     totalgr2 += gr;
                 }
             }
-            newContrast2 = (double)10f * Math.Log10((double)((double)totalgr1 / (double)(CitraOutput2.Width * CitraOutput2.Height)) - Math.Pow((double)totalgr2 / (double)(CitraOutput2.Width * CitraOutput2.Height), 2));
+            Contrast_ACEDP = (double)10f * Math.Log10((double)((double)totalgr1 / (double)(CitraOutput2.Width * CitraOutput2.Height)) - Math.Pow((double)totalgr2 / (double)(CitraOutput2.Width * CitraOutput2.Height), 2));
             for (int i = 0; i < H.Length; i++)
             {
                 newHpdf1[i] = (double)newH1[i] / (double)newH1.Sum();
@@ -169,9 +169,9 @@ namespace ProgramTA
                 if (pdf[i] > 0)
                     Entropy += ((double)(-1) * (double)pdf[i] * (double)Math.Log(pdf[i], 2));
                 if (newHpdf1[i] > 0)
-                    newEntropy1 += ((double)(-1) * (double)newHpdf1[i] * (double)Math.Log(newHpdf1[i], 2));
+                    Entropy_AFCEDP += ((double)(-1) * (double)newHpdf1[i] * (double)Math.Log(newHpdf1[i], 2));
                 if (newHpdf2[i] > 0)
-                    newEntropy2 += ((double)(-1) * (double)newHpdf2[i] * (double)Math.Log(newHpdf2[i], 2));
+                    Entropy_ACEDP += ((double)(-1) * (double)newHpdf2[i] * (double)Math.Log(newHpdf2[i], 2));
             }
         }
         private double means(double[] p)

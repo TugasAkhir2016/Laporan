@@ -41,6 +41,8 @@ namespace ProgramTA
         {
             coba.Clear();
             Cursor.Current = Cursors.WaitCursor;
+            Application.DoEvents();
+            label11.Visible = true;
             progressBar1.Visible = true;
             if (checkBox1.Checked && checkBox2.Checked)
             {
@@ -59,6 +61,7 @@ namespace ProgramTA
                 progressBar1.Maximum = System.IO.Directory.GetFiles(folderpath).Length;
             }
             progressBar1.Value = 1; progressBar1.Step = 1;
+            label11.Text = (((double)progressBar1.Value / progressBar1.Maximum) * 100).ToString("F2") + " %"; label11.Refresh();
             if (Convert.ToInt32(textBox3.Text) >= 0 && Convert.ToInt32(textBox3.Text) <= 255 && Convert.ToInt32(textBox2.Text) >= 0 && Convert.ToInt32(textBox2.Text) <= 255 && Convert.ToInt32(textBox3.Text) < Convert.ToInt32(textBox2.Text))
             {
                 conrerata = 0; conrerata1 = 0; conrerata2 = 0; enrerata = 0; enrerata1 = 0; enrerata2 = 0;
@@ -68,6 +71,7 @@ namespace ProgramTA
 
                     do
                     {
+
                         if (checkBox1.Checked == false)
                             c1 = (double)numericUpDown1.Value;
 
@@ -77,13 +81,14 @@ namespace ProgramTA
                         do
                         {
                             progressBar1.PerformStep(); progressBar1.Refresh();
+                            label11.Text = (((double)progressBar1.Value / progressBar1.Maximum) * 100).ToString("F2") + " %"; label11.Refresh();
                             coba.Add(new CitraCoba(s, low, mid, high, Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), c1, c2, false));
                             conrerata += coba[coba.Count - 1].Contrast;
-                            conrerata1 += coba[coba.Count - 1].newContrast1;
-                            conrerata2 += coba[coba.Count - 1].newContrast2;
+                            conrerata1 += coba[coba.Count - 1].Entropy_AFCEDP;
+                            conrerata2 += coba[coba.Count - 1].Entropy_ACEDP;
                             enrerata += coba[coba.Count - 1].Entropy;
-                            enrerata1 += coba[coba.Count - 1].newEntropy1;
-                            enrerata2 += coba[coba.Count - 1].newEntropy2;
+                            enrerata1 += coba[coba.Count - 1].Entropy_AFCEDP;
+                            enrerata2 += coba[coba.Count - 1].Entropy_ACEDP;
                             c1 = Convert.ToDouble((decimal)c1 + 0.001M);
                         } while (c1 <= -0.005 && checkBox1.Checked == true);
                         c1 = -0.015;
@@ -95,7 +100,7 @@ namespace ProgramTA
                 List<TabelCoba> tabel = new List<TabelCoba>();
                 foreach (CitraCoba c in coba)
                 {
-                    tabel.Add(new TabelCoba(Path.GetFileName(c.filename), c.c1, c.c2, c.Entropy, c.newEntropy1, c.newEntropy2, c.Contrast, c.newContrast1, c.newContrast2));
+                    tabel.Add(new TabelCoba(Path.GetFileName(c.filename), c.c1, c.c2, c.Entropy, c.Entropy_AFCEDP, c.Entropy_ACEDP, c.Contrast, c.Contrast_AFCEDP, c.Contrast_ACEDP));
                 }
                 var bind = new Library.Forms.SortableBindingList<TabelCoba>(tabel);
                 textBox6.Text = ((double)conrerata / (double)coba.Count).ToString();
@@ -106,7 +111,7 @@ namespace ProgramTA
                 textBox9.Text = ((double)enrerata2 / (double)coba.Count).ToString();
                 dataGridView2.DataSource = bind;
                 progressBar1.Visible = false;
-
+                label11.Visible = false;
                 Cursor.Current = Cursors.Default;
             }
             else
@@ -115,6 +120,7 @@ namespace ProgramTA
 
         private void dataGridView2_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+
             DataGridView dtg = sender as DataGridView;
             DataGridViewColumn newColumn = dtg.Columns[e.ColumnIndex];
             DataGridViewColumn oldColumn = dtg.SortedColumn;
