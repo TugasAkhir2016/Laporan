@@ -168,7 +168,7 @@ namespace ProgramTA
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(textBox1.Text) >= 0 && Convert.ToInt32(textBox1.Text) <= 255 && Convert.ToInt32(textBox2.Text) >= 0 && Convert.ToInt32(textBox2.Text) <= 255 && Convert.ToInt32(textBox1.Text) < Convert.ToInt32(textBox2.Text))
+            if (Convert.ToInt32(textBox1.Text) >= 0 && Convert.ToInt32(textBox1.Text) <= 255 && Convert.ToInt32(textBox2.Text) >= 0 && Convert.ToInt32(textBox2.Text) <= 255 && Convert.ToInt32(textBox1.Text) <= Convert.ToInt32(textBox2.Text))
             {
                 Cursor.Current = Cursors.WaitCursor;
                 Application.DoEvents();

@@ -62,7 +62,7 @@ namespace ProgramTA
             }
             progressBar1.Value = 1; progressBar1.Step = 1;
             label11.Text = (((double)progressBar1.Value / progressBar1.Maximum) * 100).ToString("F2") + " %"; label11.Refresh();
-            if (Convert.ToInt32(textBox3.Text) >= 0 && Convert.ToInt32(textBox3.Text) <= 255 && Convert.ToInt32(textBox2.Text) >= 0 && Convert.ToInt32(textBox2.Text) <= 255 && Convert.ToInt32(textBox3.Text) < Convert.ToInt32(textBox2.Text))
+            if (Convert.ToInt32(textBox3.Text) >= 0 && Convert.ToInt32(textBox3.Text) <= 255 && Convert.ToInt32(textBox2.Text) >= 0 && Convert.ToInt32(textBox2.Text) <= 255 && Convert.ToInt32(textBox3.Text) <= Convert.ToInt32(textBox2.Text))
             {
                 conrerata = 0; conrerata1 = 0; conrerata2 = 0; enrerata = 0; enrerata1 = 0; enrerata2 = 0;
                 foreach (string s in System.IO.Directory.GetFiles(folderpath))
@@ -84,8 +84,8 @@ namespace ProgramTA
                             label11.Text = (((double)progressBar1.Value / progressBar1.Maximum) * 100).ToString("F2") + " %"; label11.Refresh();
                             coba.Add(new CitraCoba(s, low, mid, high, Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), c1, c2, false));
                             conrerata += coba[coba.Count - 1].Contrast;
-                            conrerata1 += coba[coba.Count - 1].Entropy_AFCEDP;
-                            conrerata2 += coba[coba.Count - 1].Entropy_ACEDP;
+                            conrerata1 += coba[coba.Count - 1].Contrast_AFCEDP;
+                            conrerata2 += coba[coba.Count - 1].Contrast_ACEDP;
                             enrerata += coba[coba.Count - 1].Entropy;
                             enrerata1 += coba[coba.Count - 1].Entropy_AFCEDP;
                             enrerata2 += coba[coba.Count - 1].Entropy_ACEDP;
