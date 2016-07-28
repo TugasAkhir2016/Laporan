@@ -162,9 +162,5 @@ namespace DDPanBox
             return rect;
 
         }
-
-        
-
-        
     }
 }
