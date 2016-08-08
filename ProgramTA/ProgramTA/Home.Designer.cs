@@ -523,7 +523,8 @@
             this.Controls.Add(this.groupBox2);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Home";
-            this.Text = "Aplikasi Peningkatan Kontras Citra Grayscale";
+            this.Text = "Aplikasi Peningkatan Kontras Citra Grayscale  dengan Adaptive Fuzzy Contrast Enha" +
+    "ncement algorithm with Details Preserving";
             this.Load += new System.EventHandler(this.Home_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
