@@ -99,7 +99,7 @@ namespace DDPanBox
                 //    DrawRect = new Rectangle(DrawRect.Location.X, DrawRect.Location.Y, ClientRectangle.Width / 2, ClientRectangle.Height / 2);
                 //}
                 //else
-                    DrawRect = new Rectangle(DrawRect.Location.X, DrawRect.Location.Y, ClientRectangle.Width, ClientRectangle.Height);
+                DrawRect = new Rectangle(DrawRect.Location.X, DrawRect.Location.Y, ClientRectangle.Width, ClientRectangle.Height);
 
                 if (DrawRect.Location.X < 0 - Padding.Left)
                     DrawRect.Location = new Point(0 - Padding.Left, DrawRect.Location.Y);
@@ -143,7 +143,9 @@ namespace DDPanBox
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
                 e.Graphics.DrawImage(_Image, ClientRectangle, DrawRect, GraphicsUnit.Pixel);
-
+                //e.Graphics.DrawImage(_Image, ClientRectangle,(ClientRectangle.Width-_Image.Width)/2,(ClientRectangle.Height- _Image.Height)/2, DrawRect.Width,DrawRect.Height, GraphicsUnit.Pixel);
+                
+                //e.Graphics.DrawImage(_Image, ClientRectangle.Width / 2, ClientRectangle.Height / 2, DrawRect.Width, DrawRect.Height);
                 //if(zoom)
                 //    e.Graphics.DrawString("Zoom 2:1", this.Font, Brushes.White, new PointF(15F, 15F));
                 //else

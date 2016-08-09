@@ -24,6 +24,11 @@ namespace ProgramTA
             this.name = name;
             InitializeComponent();
         }
+        public Tampil_CItra(string name)
+        {
+            this.name = name;
+            InitializeComponent();
+        }
         private Bitmap Citra { set; get; }
         private string name { set; get; }
         private float aspectratio { set; get; }
@@ -37,20 +42,20 @@ namespace ProgramTA
             //pictureBox1.Visible = false;
             ddPanBox1.Image = Citra;
             this.Text = "Tampil Citra - " + name;
-            ImageStatistics stat = new ImageStatistics(Citra);
-            Histogram hist = stat.Red;
-            histogram1.Color = Color.Black;
-            histogram1.Values = hist.Values;
+            //ImageStatistics stat = new ImageStatistics(Citra);
+            //AForge.Math.Histogram hist = stat.Red;
+            //histogram1.Color = Color.Black;
+            //histogram1.Values = hist.Values;
             ComboboxZoom.SelectedIndex = 2;
             aspectratio = Convert.ToSingle((float)Citra.Width / (float)Citra.Height);
-            nilaiaspect.Text = aspectratio.ToString("F3");
-            nilaimean.Text = stat.Red.Mean.ToString("F3");
-            nilaimedian.Text = stat.Red.Median.ToString();
-            nilaimin.Text = stat.Red.Min.ToString();
-            nilaimax.Text = stat.Red.Max.ToString();
-            bnykpixel.Text = stat.Red.TotalCount.ToString();
-            double stddev = Statistics.StdDev(hist.Values);
-            nilaistd.Text = stddev.ToString("F3");
+            //nilaiaspect.Text = aspectratio.ToString("F3");
+            //nilaimean.Text = stat.Red.Mean.ToString("F3");
+            //nilaimedian.Text = stat.Red.Median.ToString();
+            //nilaimin.Text = stat.Red.Min.ToString();
+            //nilaimax.Text = stat.Red.Max.ToString();
+            //bnykpixel.Text = stat.Red.TotalCount.ToString();
+            //double stddev = Statistics.StdDev(hist.Values);
+            //nilaistd.Text = stddev.ToString("F3");
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
