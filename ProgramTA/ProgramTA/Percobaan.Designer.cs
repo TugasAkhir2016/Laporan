@@ -50,6 +50,7 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -58,7 +59,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -86,6 +86,7 @@
             // 
             // textBox2
             // 
+            this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(383, 21);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(52, 20);
@@ -94,6 +95,7 @@
             // 
             // textBox3
             // 
+            this.textBox3.Enabled = false;
             this.textBox3.Location = new System.Drawing.Point(287, 21);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(52, 20);
@@ -148,29 +150,29 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 490);
+            this.label1.Location = new System.Drawing.Point(23, 490);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 13);
+            this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 25;
-            this.label1.Text = "Contrast awal";
+            this.label1.Text = "CIE awal";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(93, 490);
+            this.label2.Location = new System.Drawing.Point(102, 490);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 13);
+            this.label2.Size = new System.Drawing.Size(69, 13);
             this.label2.TabIndex = 26;
-            this.label2.Text = "Contrast AFCEDP";
+            this.label2.Text = "CIE AFCEDP";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(188, 490);
+            this.label5.Location = new System.Drawing.Point(196, 490);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 13);
+            this.label5.Size = new System.Drawing.Size(63, 13);
             this.label5.TabIndex = 27;
-            this.label5.Text = "Contrast ACEDP";
+            this.label5.Text = "CIE ACEDP";
             // 
             // label6
             // 
@@ -209,7 +211,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(113, 508);
+            this.textBox4.Location = new System.Drawing.Point(109, 508);
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(51, 20);
@@ -217,7 +219,7 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(205, 508);
+            this.textBox5.Location = new System.Drawing.Point(202, 508);
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
             this.textBox5.Size = new System.Drawing.Size(51, 20);
@@ -258,6 +260,17 @@
             this.groupBox1.TabIndex = 37;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Rata-rata";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(765, 36);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(40, 15);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "%%%";
+            this.label11.Visible = false;
             // 
             // progressBar1
             // 
@@ -379,17 +392,6 @@
             0,
             0,
             -2147352576});
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(765, 36);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(40, 15);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "%%%";
-            this.label11.Visible = false;
             // 
             // Percobaan
             // 

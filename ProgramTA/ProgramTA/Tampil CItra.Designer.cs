@@ -118,7 +118,7 @@
             this.MaximizeBox = false;
             this.Name = "Tampil_CItra";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Tampil Citra";
+            this.Text = "View";
             this.Load += new System.EventHandler(this.Tampil_CItra_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

@@ -130,6 +130,7 @@ namespace ProgramTA
                 pictureBox1.Image = bmp;
                 textBox3.Text = Entropy.ToString();
                 textBox6.Text = Contrast.ToString();
+                btn_Show.Enabled = false; btn_histo.Enabled = false;
             }
         }
 
