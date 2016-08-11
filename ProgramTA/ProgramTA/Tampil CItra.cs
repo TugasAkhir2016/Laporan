@@ -41,7 +41,7 @@ namespace ProgramTA
             //pictureBox1.Image = Citra;
             //pictureBox1.Visible = false;
             ddPanBox1.Image = Citra;
-            this.Text = "Tampil Citra - " + name;
+            this.Text = "View - " + name;
             //ImageStatistics stat = new ImageStatistics(Citra);
             //AForge.Math.Histogram hist = stat.Red;
             //histogram1.Color = Color.Black;
